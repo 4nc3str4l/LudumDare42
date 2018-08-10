@@ -12,7 +12,7 @@ import net.lostsocket.ld42.scenes.SceneManager;
 public class RunningOutOfSpace extends ApplicationAdapter {
 	
 	private SpriteBatch batch;
-	private Texture img;
+	public static Texture img;
 	
 	@Override
 	public void create () {
