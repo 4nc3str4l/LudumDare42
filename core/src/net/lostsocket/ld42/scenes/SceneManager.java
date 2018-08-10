@@ -9,6 +9,7 @@ public class SceneManager {
 	public static void loadScene(AbstractScene scene) {
 		if(currentScene != null)
 			currentScene.dispose();
+		currentScene = scene;
 		currentScene.load();
 	}
 
