@@ -10,6 +10,9 @@ public abstract class AbstractScene {
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	
+	public abstract void load();
+	public abstract void dispose();
+	
 	public void tick(float delta) {
 		for(Entity entity : entities) {
 			entity.tick(delta);
