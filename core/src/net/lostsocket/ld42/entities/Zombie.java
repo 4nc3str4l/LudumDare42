@@ -20,6 +20,8 @@ public class Zombie extends Mortal{
 	private RandomSound growlSoundManager;
 	
 	public static Sound growl = null;
+	private static Sound squish = null;
+	private static Sound hit = null;
 	
 	public Zombie() {
 		super(100, 7);
@@ -41,6 +43,8 @@ public class Zombie extends Mortal{
 	
 	private void loadSounds() {
 		growl = Gdx.audio.newSound(Gdx.files.internal("sounds/zombie.wav"));
+		squish = Gdx.audio.newSound(Gdx.files.internal("sounds/squish.wav"));
+		hit = Gdx.audio.newSound(Gdx.files.internal("sounds/zombie_hit.wav"));
 	}
 	
 	@Override
@@ -66,8 +70,11 @@ public class Zombie extends Mortal{
 
 	@Override
 	public void onCollision(Entity other) {
-		if(other instanceof HandgunBullet) {
+		if(isAlive && other instanceof Bullet) {
 			health -= 20;
+			hit.play(Maths.getRandomFloat(0.5f, 0.8f),
+					Maths.getRandomFloat(0.95f, 1.05f),
+					0);
 		}
 		
 		if(other instanceof Zombie) {
@@ -88,5 +95,14 @@ public class Zombie extends Mortal{
 		removeComponent(aliveSprite);
 		removeComponent(growlSoundManager);
 		GameManager.instance.onZombieDead();
+		squish.play(Maths.getRandomFloat(0.5f, 0.8f),
+				Maths.getRandomFloat(0.95f, 1.05f),
+				0);
+	}
+	
+	public static void disposeSounds() {
+		growl.dispose();
+		squish.dispose();
+		hit.dispose();
 	}
 }

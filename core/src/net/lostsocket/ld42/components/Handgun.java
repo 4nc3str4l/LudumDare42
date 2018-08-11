@@ -3,7 +3,7 @@ package net.lostsocket.ld42.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
-import net.lostsocket.ld42.entities.HandgunBullet;
+import net.lostsocket.ld42.entities.Bullet;
 import net.lostsocket.ld42.entities.Player;
 
 public class Handgun extends AbstractComponent implements IUpdatable{
@@ -30,7 +30,7 @@ public class Handgun extends AbstractComponent implements IUpdatable{
 	
 	public void shoot(){
 		sound.play();
-		owner.currentScene.addEntity(new HandgunBullet(owner));
+		owner.currentScene.addEntity(new Bullet(owner));
 	}
 
 	@Override

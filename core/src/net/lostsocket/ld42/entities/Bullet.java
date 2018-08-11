@@ -6,12 +6,12 @@ import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.SpriteComponent;
 import net.lostsocket.ld42.components.TimedDestroyComponent;
 
-public class HandgunBullet extends Entity {
+public class Bullet extends Entity {
 	
 	private final float SPEED = 1000f;
 	private Entity owner;
 	
-	public HandgunBullet(Entity owner) {
+	public Bullet(Entity owner) {
 		super(3);
 		this.owner = owner;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 3));
