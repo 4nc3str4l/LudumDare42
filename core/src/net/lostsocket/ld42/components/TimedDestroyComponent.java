@@ -12,7 +12,6 @@ public class TimedDestroyComponent extends AbstractComponent implements IUpdatab
 	public void update(float delta) {
 	
 		remainingTime -= delta;
-		System.out.println(remainingTime);
 		if(remainingTime <= 0)
 			owner.isDestroyed = true;
 	}
