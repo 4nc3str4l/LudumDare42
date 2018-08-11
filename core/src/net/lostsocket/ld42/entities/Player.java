@@ -2,6 +2,7 @@ package net.lostsocket.ld42.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 
 import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.Handgun;
@@ -51,7 +52,14 @@ public class Player extends Mortal{
 
 	@Override
 	public void onCollision(Entity other) {
-		
+		if(other instanceof Zombie) {
+			Zombie z = (Zombie)other;
+			Vector2 pushDirection = new Vector2(other.transform.position);
+			pushDirection.sub(transform.position);
+			pushDirection.nor();
+			float ammount = z.isAlive ? -5 : -2;
+			transform.position.add(pushDirection.scl(ammount));
+		}
 	}
 
 	@Override
