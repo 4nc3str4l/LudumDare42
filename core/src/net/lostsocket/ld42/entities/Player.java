@@ -30,6 +30,9 @@ public class Player extends Mortal{
 		
 		handgun = new Handgun();
 		addComponent(handgun);
+		
+		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
+		transform.position.y = Gdx.graphics.getHeight() / 2 - 16;
 	}
 
 	@Override

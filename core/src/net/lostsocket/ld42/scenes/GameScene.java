@@ -1,16 +1,19 @@
 package net.lostsocket.ld42.scenes;
 
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.entities.MapBackground;
+import net.lostsocket.ld42.entities.Player;
 
 public class GameScene extends AbstractScene{
 
 	private Texture bgTexture = new Texture("MapBg.png");
 	private Texture bgForest = new Texture("Forest.png");
-	private GameManager gameManager;
+	private Sprite lightMask = new Sprite(new Texture("lightMask.png"));
 	
 	@Override
 	public void load() {
@@ -23,12 +26,24 @@ public class GameScene extends AbstractScene{
 	public void dispose() {
 		System.out.println("Game Scene Disposed!");
 		bgTexture.dispose();
+		bgForest.dispose();
+		lightMask.getTexture().dispose();
 	}
 
 	@Override
 	public void customRender(SpriteBatch batch) {
 		batch.draw(bgForest, 0, 0);
-		gameManager.renderUI(batch);
+		
+		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
+		if(Player.instance != null) {
+			lightMask.setPosition(Player.instance.transform.position.x - 984, Player.instance.transform.position.y - 984);
+		}else {
+			lightMask.setPosition(0, 0);
+		}
+		lightMask.draw(batch, 0.2f);
+		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		
+		GameManager.instance.renderUI(batch);
 	}
 }
  
