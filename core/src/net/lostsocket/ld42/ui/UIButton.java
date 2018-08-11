@@ -1,8 +1,10 @@
 package net.lostsocket.ld42.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class UIButton extends UI{
 	
@@ -27,8 +29,24 @@ public class UIButton extends UI{
 	@Override
 	public void update(float delta) {
 		
+		if(currentStatus == BtnStatus.DISABLED || currentStatus == BtnStatus.SELECTED)
+			return;
 		
+		Vector2 mousePos = new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
 		
+		currentStatus = rect.contains(mousePos) ? BtnStatus.HOVER : BtnStatus.NORMAL;
+		
+		if(currentStatus == currentStatus.HOVER) {
+			if(Gdx.input.isButtonPressed(0)) {
+				currentStatus = BtnStatus.SELECTED;
+				onButtonClick();
+			}
+		}
+		
+	}
+	
+	private void onButtonClick() {
+		System.out.println("Button Clicked!");
 	}
 	
 	@Override

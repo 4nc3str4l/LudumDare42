@@ -101,6 +101,9 @@ public class Zombie extends Mortal{
 	}
 	
 	public static void disposeSounds() {
+		if(growl == null)
+			return; 
+		
 		growl.dispose();
 		squish.dispose();
 		hit.dispose();
