@@ -1,6 +1,7 @@
 package net.lostsocket.ld42.scenes;
 
 import net.lostsocket.ld42.entities.Player;
+import net.lostsocket.ld42.entities.Zombie;
 
 public class GameScene extends AbstractScene{
 
@@ -8,6 +9,10 @@ public class GameScene extends AbstractScene{
 	public void load() {
 		System.out.println("Game Scene Loaded!");
 		addEntity(new Player());
+		
+		for(int i = 0; i < 50; ++i) {
+			addEntity(new Zombie());
+		}
 	}
 
 	@Override

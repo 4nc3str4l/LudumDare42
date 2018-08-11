@@ -8,9 +8,11 @@ import net.lostsocket.ld42.components.SpriteComponent;
 
 public class Player extends Entity{
 	
+	public static Player instance;
 	public float speed = 100;
 	
 	public Player() {
+		instance = this;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 1));
 	}
 
