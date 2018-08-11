@@ -21,7 +21,7 @@ public class Player extends Mortal{
 	private SpriteComponent deadSprite;
 
 	private Weapon weapons[];
-	private Weapon currentWeapon;
+	public Weapon currentWeapon;
 	public int weaponIndex = 0;
 	
 	public Player() {

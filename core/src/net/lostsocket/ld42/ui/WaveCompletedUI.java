@@ -21,7 +21,6 @@ public class WaveCompletedUI extends UI {
 	private UIButton btnSurvivors;
 	private UIButton btnConfirm;
 	
-	
 	public WaveCompletedUI() {
 		int middleX = Gdx.graphics.getWidth() / 2 - 168 / 2;
 		btnUpgrade = new UIButton("BtnUpgrade", middleX - 200, 310);
@@ -32,6 +31,7 @@ public class WaveCompletedUI extends UI {
 				setCurrentAction(Action.UPGRADE);
 			}
 		});
+		btnUpgrade.setEnabled(!Player.instance.currentWeapon.isMaxLevel());
 		
 		btnFindWeapon = new UIButton("BtnFindWeapon", middleX, 310);
 		btnFindWeapon.setCallback(new UIButtonClick() {
@@ -103,6 +103,7 @@ public class WaveCompletedUI extends UI {
 		case REMOVE_BODIES:
 			break;
 		case UPGRADE:
+			Player.instance.currentWeapon.levelUP();
 			break;
 		default:
 			break;

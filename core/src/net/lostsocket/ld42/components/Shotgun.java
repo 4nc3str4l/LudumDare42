@@ -8,6 +8,7 @@ public class Shotgun extends Weapon{
 	public Shotgun() {
 		super("sounds/shotgun.wav");
 		damage = 20;
+		shootRate = 1.0f;
 	}
 	
 	public void shoot(){
@@ -17,5 +18,25 @@ public class Shotgun extends Weapon{
 
 	@Override
 	protected void levelUpLogic(int newLevel) {
+		switch(newLevel) {
+		case 2:
+			damage += 5;
+			shootRate -= 0.1f;
+			break; 
+		case 3:
+			damage += 5;
+			shootRate -= 0.05f;
+			break;
+		case 4:
+			damage += 5;
+			shootRate -= 0.05f;
+			break; 
+		case 5:
+			damage += 5;
+			shootRate -= 0.05f;
+			break;
+		}
+		
+		System.out.println("New Level " + newLevel);
 	}
 }

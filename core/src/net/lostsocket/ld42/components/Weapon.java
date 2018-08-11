@@ -3,7 +3,6 @@ package net.lostsocket.ld42.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
-import net.lostsocket.ld42.entities.Bullet;
 import net.lostsocket.ld42.entities.Player;
 
 public abstract class Weapon extends AbstractComponent implements IUpdatable{
@@ -51,14 +50,14 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	}
 	
 	public boolean isMaxLevel() {
-		return currentWeaponLevel < MAX_WEAPON_LEVEL;
+		return currentWeaponLevel == MAX_WEAPON_LEVEL;
 	}
 	
 	protected abstract void levelUpLogic(int newLevel);
 	
 	public void levelUP() {
 		
-		if(currentWeaponLevel < MAX_WEAPON_LEVEL)
+		if(currentWeaponLevel == MAX_WEAPON_LEVEL)
 			return;
 		
 		++currentWeaponLevel;

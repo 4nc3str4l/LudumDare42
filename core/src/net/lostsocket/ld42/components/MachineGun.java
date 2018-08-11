@@ -17,6 +17,23 @@ public class MachineGun extends Weapon{
 
 	@Override
 	protected void levelUpLogic(int newLevel) {
+		switch(newLevel) {
+		case 2:
+			damage += 5;
+			shootRate -= 0.005f;
+			break; 
+		case 3:
+			damage += 5;
+			shootRate -= 0.005f;
+			break;
+		case 4:
+			damage += 5;
+			shootRate -= 0.005f;
+			break; 
+		case 5:
+			damage += 5;
+			shootRate -= 0.005f;
+			break;
+		}
 	}
-
 }

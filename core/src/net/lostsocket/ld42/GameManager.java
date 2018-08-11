@@ -18,7 +18,7 @@ import net.lostsocket.ld42.ui.WaveCompletedUI;
 public class GameManager extends Entity {
 	
 	public static GameManager instance;
-	private final int ZOMBIES_MULT = 5;
+	private final int ZOMBIES_MULT = 2;
 
 	private int wave = 1;
 	private int nZombiesAlive = 0;
