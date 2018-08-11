@@ -105,6 +105,7 @@ public class WaveCompletedUI extends UI {
 		
 		switch (currentAction) {
 		case FIND_SURVIVORS:
+			currentMessage = GameManager.instance.tryFindNPC();
 			break;
 		case HEAL:
 			currentMessage = Player.instance.heal();

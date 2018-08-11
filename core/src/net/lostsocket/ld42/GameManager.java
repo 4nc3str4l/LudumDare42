@@ -75,7 +75,6 @@ public class GameManager extends Entity {
 		nZombiesAlive = 0;
 		totalNumKills = 0;
 		currentScene.addEntity(new Player());
-		spawnNPC();
 		currentState = GameState.PLAYING;
 		changeUI(new InGameUI());
 		remainingTimeWarmingUp = WARMUP_TIME;
@@ -84,8 +83,28 @@ public class GameManager extends Entity {
 		nextWaveLogic();
 	}
 	
-	public void spawnNPC() {
-		currentScene.addEntity(new NPC());
+	public String tryFindNPC() {
+		
+		/*
+		if(Maths.getRandomFloat(0, 1) < 0.7){
+			return "No one found, alive... maybe tomorrow...";
+		}
+		*/
+		
+		NPC npc = new NPC();
+		currentScene.addEntity(npc);
+		switch (npc.choosenBehaviour) {
+		case NPC.PROTECTIVE:
+			return "You found a Survivor, it looks like a very protective person";
+		case NPC.SELFISH:
+			return "You found a Survivor, be carefull he looks a bit selfish";
+		case NPC.COWARD:
+			return "You found a Survivor, be carefull he looks a bit coward";
+		case NPC.SNIPER:
+			return "You found an Sniper from the Rusian army";
+		default:
+			return "";
+		}
 	}
 	
 	public void onZombieDead(Zombie z) {
@@ -121,7 +140,6 @@ public class GameManager extends Entity {
 			aliveZombies.add(z);
 			currentScene.addEntity(z);
 		}
-		System.out.println("Spawned Zombies Size " + spawnedZombies.size());
 	}
 	
 	public void renderUI(SpriteBatch batch) {

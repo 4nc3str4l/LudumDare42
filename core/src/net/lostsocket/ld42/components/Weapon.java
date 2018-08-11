@@ -86,4 +86,8 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 		
 		return "Congratulations your " + name + " is now level " + currentWeaponLevel + "!";
 	}
+	
+	public boolean isShootingAvaliable() {
+		return timeUntilNextShoot <= 0;
+	}
 }
