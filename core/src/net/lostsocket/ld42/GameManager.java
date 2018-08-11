@@ -27,6 +27,9 @@ public class GameManager extends Entity {
 	public enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
 	public GameState currentState = GameState.NOT_STARTED;
 	
+	public final float WARMUP_TIME = 1.0f;
+	private float remainingTimeWarmingUp = 1.0f;
+	
 	private UI currentUI;
 	
 	public GameManager() {
@@ -54,6 +57,10 @@ public class GameManager extends Entity {
 		
 		if(currentUI != null)
 			currentUI.update(delta);
+		
+		if(remainingTimeWarmingUp > 0) {
+			remainingTimeWarmingUp -= delta;
+		}
 	}
 	
 	public void restartGame() {
@@ -64,6 +71,7 @@ public class GameManager extends Entity {
 		nextWaveLogic();
 		currentState = GameState.PLAYING;
 		changeUI(new InGameUI());
+		remainingTimeWarmingUp = WARMUP_TIME;
 	}
 	
 	public void onZombieDead() {
@@ -88,6 +96,7 @@ public class GameManager extends Entity {
 		nZombiesAlive = wave * ZOMBIES_MULT;
 		spawnZombies(nZombiesAlive);
 		changeUI(new InGameUI());
+		remainingTimeWarmingUp = WARMUP_TIME;
 	}
 	
 	private void spawnZombies(int amount) {
@@ -119,6 +128,10 @@ public class GameManager extends Entity {
 
 	public int getTotalNumKills() {
 		return totalNumKills;
+	}
+	
+	public boolean isWarmingUp() {
+		return remainingTimeWarmingUp > 0;
 	}
 	
 	//TODO: Consider another strategy to avoid that

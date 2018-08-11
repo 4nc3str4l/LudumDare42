@@ -9,6 +9,7 @@ public class Shotgun extends Weapon{
 		super("sounds/shotgun.wav");
 		damage = 20;
 		shootRate = 1.0f;
+		name = "Shotgun";
 	}
 	
 	public void shoot(){

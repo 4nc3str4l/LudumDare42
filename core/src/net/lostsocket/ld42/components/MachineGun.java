@@ -8,6 +8,7 @@ public class MachineGun extends Weapon{
 		super("sounds/handgun_shot.wav");
 		shootRate = 0.05f;
 		damage = 20;
+		name = "Machine Gun";
 	}
 	
 	public void shoot() {

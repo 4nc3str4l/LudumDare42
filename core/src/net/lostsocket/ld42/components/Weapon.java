@@ -3,6 +3,7 @@ package net.lostsocket.ld42.components;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
+import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.entities.Player;
 
 public abstract class Weapon extends AbstractComponent implements IUpdatable{
@@ -16,6 +17,8 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	protected float damage = 20;
 	protected float shootRate = 1f;
 	private float timeUntilNextShoot = 0;
+
+	public String name;
 	
 	public Weapon(String soundPath) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(soundPath));
@@ -23,6 +26,9 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	
 	@Override
 	public void update(float delta) {
+		
+		if(GameManager.instance.isWarmingUp())
+			return;
 		
 		if(timeUntilNextShoot > 0) {
 			timeUntilNextShoot -= delta;

@@ -1,11 +1,13 @@
 package net.lostsocket.ld42.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.GameManager;
+import net.lostsocket.ld42.entities.Player;
 
 public class InGameUI extends UI{
 	
@@ -19,7 +21,14 @@ public class InGameUI extends UI{
 		font.draw(batch, "Wave: " + GameManager.instance.getWave(), Gdx.graphics.getWidth() / 2 - 15, Gdx.graphics.getHeight() - 10);
 		
 		batch.draw(bottonRect, 0, 0);
+		
 		font.draw(batch, "Kills: " + GameManager.instance.getTotalNumKills(), 10, 25);
+		
+		font.setColor(Color.RED);
+		font.draw(batch, "Health: " + Player.instance.health, 70, 25);
+	
+		font.setColor(Color.WHITE);
+		font.draw(batch, "Current Weapon: " + Player.instance.currentWeapon.name, 170, 25);
 	}
 
 

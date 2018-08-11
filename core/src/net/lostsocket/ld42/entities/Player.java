@@ -25,8 +25,12 @@ public class Player extends Mortal{
 	public int weaponIndex = 0;
 	
 	public Player() {
+		
 		super(100, 7);
 		instance = this;
+		
+		health = 100;
+		maxHealth = 100;
 		
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 1);
 		addComponent(aliveSprite);
@@ -111,8 +115,14 @@ public class Player extends Mortal{
 
 	@Override
 	public void onCollision(Entity other) {
-		if(!isAlive)
+		
+		if(GameManager.instance.isWarmingUp())
 			return;
+		
+		if(!isAlive) {
+			health = 0;
+			return;
+		}
 		
 		if(other instanceof Zombie) {
 			Zombie z = (Zombie)other;
@@ -122,8 +132,7 @@ public class Player extends Mortal{
 			float ammount = z.isAlive ? -5 : -2;
 			transform.position.add(pushDirection.scl(ammount));
 			if(z.isAlive) {
-				health -= 10;
-				
+				health -= 1;
 			}
 		}
 	}

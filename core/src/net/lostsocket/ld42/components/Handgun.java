@@ -8,6 +8,7 @@ public class Handgun extends Weapon{
 		super("sounds/handgun_shot.wav");
 		this.shootRate = 0.5f;
 		damage = 20;
+		name = "Handgun";
 	}
 
 	public void shoot(){
