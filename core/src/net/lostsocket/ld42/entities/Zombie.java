@@ -4,12 +4,12 @@ import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.SpriteComponent;
 import net.lostsocket.ld42.maths.Maths;
 
-public class Zombie extends Entity{
+public class Zombie extends Mortal{
 	
 	public float speed = 40;
 	
 	public Zombie() {
-		super(7);
+		super(100, 7);
 		transform.position.x = Maths.getRandomBetween(-2000, 2000);
 		transform.position.y = Maths.getRandomBetween(-2000, 2000);
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 0));
@@ -29,5 +29,13 @@ public class Zombie extends Entity{
 
 	@Override
 	public void onCollision(Entity other) {
+		if(other instanceof HandgunBullet) {
+			health -= 20;
+		}
+	}
+
+	@Override
+	public void onDead() {
+		isDestroyed = true;
 	}
 }

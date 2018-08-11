@@ -7,7 +7,7 @@ import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.Handgun;
 import net.lostsocket.ld42.components.SpriteComponent;
 
-public class Player extends Entity{
+public class Player extends Mortal{
 	
 	public static Player instance;
 	public float speed = 100;
@@ -15,7 +15,7 @@ public class Player extends Entity{
 	private Handgun handgun;
 	
 	public Player() {
-		super(7);
+		super(100, 7);
 		instance = this;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 1));
 		
@@ -51,7 +51,11 @@ public class Player extends Entity{
 
 	@Override
 	public void onCollision(Entity other) {
-	
+		
+	}
+
+	@Override
+	public void onDead() {
 	}
 	
 }
