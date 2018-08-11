@@ -113,6 +113,7 @@ public class WaveCompletedUI extends UI {
 			currentMessage = Player.instance.tryFindWeapon();
 			break;
 		case REMOVE_BODIES:
+			currentMessage = GameManager.instance.removeBodies();
 			break;
 		case UPGRADE:
 			currentMessage = Player.instance.currentWeapon.levelUP();

@@ -1,5 +1,8 @@
 package net.lostsocket.ld42;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.lostsocket.ld42.entities.Entity;
 import net.lostsocket.ld42.entities.Player;
 import net.lostsocket.ld42.entities.Zombie;
+import net.lostsocket.ld42.maths.Maths;
 import net.lostsocket.ld42.scenes.GameScene;
 import net.lostsocket.ld42.scenes.SceneManager;
 import net.lostsocket.ld42.ui.GameOverUI;
@@ -29,6 +33,8 @@ public class GameManager extends Entity {
 	
 	public final float WARMUP_TIME = 1.0f;
 	private float remainingTimeWarmingUp = 1.0f;
+	
+	private ArrayList<Zombie> spawnedZombies = new ArrayList<Zombie>();
 	
 	private UI currentUI;
 	
@@ -68,10 +74,11 @@ public class GameManager extends Entity {
 		nZombiesAlive = 0;
 		totalNumKills = 0;
 		currentScene.addEntity(new Player());
-		nextWaveLogic();
 		currentState = GameState.PLAYING;
 		changeUI(new InGameUI());
 		remainingTimeWarmingUp = WARMUP_TIME;
+		spawnedZombies.clear();
+		nextWaveLogic();
 	}
 	
 	public void onZombieDead() {
@@ -101,8 +108,11 @@ public class GameManager extends Entity {
 	
 	private void spawnZombies(int amount) {
 		for(int i = 0; i < amount; ++i) {
-			currentScene.addEntity(new Zombie());
+			Zombie z = new Zombie();
+			spawnedZombies.add(z);
+			currentScene.addEntity(z);
 		}
+		System.out.println("Spawned Zombies Size " + spawnedZombies.size());
 	}
 	
 	public void renderUI(SpriteBatch batch) {
@@ -132,6 +142,19 @@ public class GameManager extends Entity {
 	
 	public boolean isWarmingUp() {
 		return remainingTimeWarmingUp > 0;
+	}
+	
+	public String removeBodies() {
+		int bodiesToRemove = Maths.getRandomBetween(1, wave * ZOMBIES_MULT);
+		Zombie z = null;
+		Collections.shuffle(spawnedZombies);
+		for(int i = 0; i < bodiesToRemove; ++i) {
+			z = spawnedZombies.get(0);
+			spawnedZombies.remove(z);
+			z.isDestroyed = true;
+		}
+		
+		return "After a long night "  + bodiesToRemove + " where removed and burned!";
 	}
 	
 	//TODO: Consider another strategy to avoid that
