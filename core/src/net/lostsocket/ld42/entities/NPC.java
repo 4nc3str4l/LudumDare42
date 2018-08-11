@@ -40,8 +40,8 @@ public class NPC extends Mortal {
 
 		super(100, 7);
 
-		health = 300;
-		maxHealth = 300;
+		health = 100;
+		maxHealth = 100;
 
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 1);
 		addComponent(aliveSprite);
@@ -111,15 +111,16 @@ public class NPC extends Mortal {
 		
 		if (other instanceof Zombie) {
 			Zombie z = (Zombie) other;
-			pushDirection = new Vector2(other.transform.position);
-			pushDirection.sub(transform.position);
-			pushDirection.nor();
-			float ammount = z.isAlive ? -5 : -2;
-			transform.position.add(pushDirection.scl(ammount));
-			if (z.isAlive) {
-				health -= 1;
+			if(z.isAlive) {
+				pushDirection = new Vector2(other.transform.position);
+				pushDirection.sub(transform.position);
+				pushDirection.nor();
+				float ammount = -5;
+				transform.position.add(pushDirection.scl(ammount));
+				if (z.isAlive) {
+					health -= 1;
+				}	
 			}
-		
 		}else if(other instanceof NPC) {
 			NPC z = (NPC)other;
 			if(z.isAlive && isAlive) {
