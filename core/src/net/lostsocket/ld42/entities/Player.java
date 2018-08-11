@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 import net.lostsocket.ld42.RunningOutOfSpace;
+import net.lostsocket.ld42.components.Handgun;
 import net.lostsocket.ld42.components.SpriteComponent;
 
 public class Player extends Entity{
@@ -11,9 +12,14 @@ public class Player extends Entity{
 	public static Player instance;
 	public float speed = 100;
 	
+	private Handgun handgun;
+	
 	public Player() {
 		instance = this;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 1));
+		
+		handgun = new Handgun();
+		addComponent(handgun);
 	}
 
 	@Override

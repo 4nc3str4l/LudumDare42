@@ -40,6 +40,7 @@ public abstract class AbstractScene {
 	}
 	
 	public void addEntity(Entity newEntity) {
+		newEntity.currentScene = this;
 		entitiesToAdd.add(newEntity);
 	}
 }

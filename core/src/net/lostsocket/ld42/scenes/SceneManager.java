@@ -20,7 +20,7 @@ public class SceneManager {
 	public static void updateScene(float delta) {
 		currentScene.tick(delta);
 	}
-
+	
 	public static void dispose() {
 		currentScene.dispose();
 	}

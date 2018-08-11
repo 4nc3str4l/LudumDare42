@@ -7,7 +7,7 @@ public class Transform {
 	public Vector2 position = new Vector2(0, 0);
 	public float rotation = 0;
 	public Vector2 scale = new Vector2(1, 1);
-	private Vector2 forward = new Vector2(0, 0);
+	public Vector2 forward = new Vector2(0, 0);
 	private Vector2 right = new Vector2(0, 0);
 	
 	public void moveForward(float amount) {
