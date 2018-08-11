@@ -1,6 +1,5 @@
 package net.lostsocket.ld42.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -29,6 +28,7 @@ public class GameScene extends AbstractScene{
 	@Override
 	public void customRender(SpriteBatch batch) {
 		batch.draw(bgForest, 0, 0);
+		gameManager.renderUI(batch);
 	}
 }
  

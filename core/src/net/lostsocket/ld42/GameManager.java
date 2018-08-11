@@ -2,6 +2,7 @@ package net.lostsocket.ld42;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.entities.Entity;
 import net.lostsocket.ld42.entities.Player;
@@ -74,6 +75,10 @@ public class GameManager extends Entity {
 		for(int i = 0; i < amount; ++i) {
 			currentScene.addEntity(new Zombie());
 		}
+	}
+	
+	public void renderUI(SpriteBatch batch) {
+		
 	}
 	
 	//TODO: Consider another strategy to avoid that
