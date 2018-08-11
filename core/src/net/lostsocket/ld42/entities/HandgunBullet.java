@@ -28,7 +28,10 @@ public class HandgunBullet extends Entity {
 	@Override
 	public void onCollision(Entity other) {
 		if(other instanceof Zombie) {
-			isDestroyed = true;
+			Zombie z = (Zombie)other;
+			if(z.isAlive) {
+				isDestroyed = true;
+			}
 		}
 	}
 }
