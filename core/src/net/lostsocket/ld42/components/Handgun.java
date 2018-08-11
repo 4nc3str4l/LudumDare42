@@ -3,6 +3,7 @@ package net.lostsocket.ld42.components;
 import com.badlogic.gdx.Gdx;
 
 import net.lostsocket.ld42.entities.HandgunBullet;
+import net.lostsocket.ld42.entities.Player;
 
 public class Handgun extends AbstractComponent implements IUpdatable{
 	
@@ -10,7 +11,7 @@ public class Handgun extends AbstractComponent implements IUpdatable{
 	
 	@Override
 	public void update(float delta) {
-		if(Gdx.input.isButtonPressed(0)){
+		if(Gdx.input.isButtonPressed(0) && Player.instance.isAlive){
 			if(!isMouseDown) {
 				shoot();
 				isMouseDown = true;

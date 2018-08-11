@@ -35,7 +35,15 @@ public class Zombie extends Mortal{
 				Player.instance.transform.position.x,
 				Player.instance.transform.position.y);
 		
-		transform.moveForward(speed * delta);
+		float distance = Vector2.dst(
+				Player.instance.transform.position.x,
+				Player.instance.transform.position.y,
+				transform.position.x,
+				transform.position.y);
+		
+		float distanceToKeep = Player.instance.isAlive ? 7 : 14;
+		if(distance > distanceToKeep)
+			transform.moveForward(speed * delta);
 	}
 
 	@Override

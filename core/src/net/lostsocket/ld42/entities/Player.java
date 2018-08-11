@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.Handgun;
 import net.lostsocket.ld42.components.SpriteComponent;
@@ -15,10 +16,17 @@ public class Player extends Mortal{
 	
 	private Handgun handgun;
 	
+	private SpriteComponent aliveSprite;
+	private SpriteComponent deadSprite;
+	
 	public Player() {
 		super(100, 7);
 		instance = this;
-		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 1));
+		
+		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 1);
+		addComponent(aliveSprite);
+		
+		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 1);
 		
 		handgun = new Handgun();
 		addComponent(handgun);
@@ -26,6 +34,9 @@ public class Player extends Mortal{
 
 	@Override
 	public void customUpdate(float delta) {
+		
+		if(!isAlive)
+			return;
 		
 		lookAtMouse();
 		
@@ -72,6 +83,9 @@ public class Player extends Mortal{
 
 	@Override
 	public void onCollision(Entity other) {
+		if(!isAlive)
+			return;
+		
 		if(other instanceof Zombie) {
 			Zombie z = (Zombie)other;
 			Vector2 pushDirection = new Vector2(other.transform.position);
@@ -79,11 +93,15 @@ public class Player extends Mortal{
 			pushDirection.nor();
 			float ammount = z.isAlive ? -5 : -2;
 			transform.position.add(pushDirection.scl(ammount));
+			health -= 10;
 		}
 	}
 
 	@Override
 	public void onDead() {
+		addComponent(deadSprite);
+		removeComponent(aliveSprite);
+		GameManager.instance.onPlayerDead();
 	}
 	
 }
