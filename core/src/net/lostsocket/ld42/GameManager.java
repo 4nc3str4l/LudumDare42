@@ -18,22 +18,22 @@ import net.lostsocket.ld42.ui.WaveCompletedUI;
 public class GameManager extends Entity {
 	
 	public static GameManager instance;
-	private final int ZOMBIES_MULT = 1;
+	private final int ZOMBIES_MULT = 5;
 
 	private int wave = 1;
 	private int nZombiesAlive = 0;
 	private int totalNumKills = 0;
 	
-	private enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
-	private GameState currentState = GameState.NOT_STARTED;
+	public enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
+	public GameState currentState = GameState.NOT_STARTED;
 	
 	private UI currentUI;
 	
 	public GameManager() {
 		super(0);
 		instance = this;
-		//changeUI(new StartGameUI());
-		changeUI(new WaveCompletedUI());
+		changeUI(new StartGameUI());
+		//changeUI(new WaveCompletedUI());
 	}
 
 	@Override
@@ -82,10 +82,12 @@ public class GameManager extends Entity {
 		changeUI(new GameOverUI());
 	}
 	
-	private void nextWaveLogic() {
+	public void nextWaveLogic() {
 		++wave;
+		currentState = GameState.PLAYING;
 		nZombiesAlive = wave * ZOMBIES_MULT;
 		spawnZombies(nZombiesAlive);
+		changeUI(new InGameUI());
 	}
 	
 	private void spawnZombies(int amount) {

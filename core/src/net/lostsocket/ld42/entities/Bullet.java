@@ -10,13 +10,15 @@ public class Bullet extends Entity {
 	
 	private final float SPEED = 1000f;
 	private Entity owner;
+	public float damage;
 	
-	public Bullet(Entity owner) {
+	public Bullet(Entity owner, float forwX, float forwY, float damage) {
 		super(3);
 		this.owner = owner;
+		this.damage = damage;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 3));
 		addComponent(new TimedDestroyComponent(1f));
-		transform.forward = new Vector2(owner.transform.forward);
+		transform.forward = new Vector2(forwX, forwY);
 		transform.position = new Vector2(owner.transform.position).add(transform.forward.x * 20, transform.forward.y * 20);
 	}
 	

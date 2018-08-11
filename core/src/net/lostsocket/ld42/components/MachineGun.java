@@ -2,19 +2,21 @@ package net.lostsocket.ld42.components;
 
 import net.lostsocket.ld42.entities.Bullet;
 
-public class Handgun extends Weapon{
-	
-	public Handgun() {
+public class MachineGun extends Weapon{
+
+	public MachineGun() {
 		super("sounds/handgun_shot.wav");
-		this.shootRate = 0.5f;
+		shootRate = 0.05f;
 		damage = 20;
 	}
-
-	public void shoot(){
+	
+	public void shoot() {
 		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage));
+		isMouseDown = false;
 	}
 
 	@Override
 	protected void levelUpLogic(int newLevel) {
 	}
+
 }

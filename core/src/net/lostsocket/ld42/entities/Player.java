@@ -7,17 +7,22 @@ import com.badlogic.gdx.math.Vector2;
 import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.Handgun;
+import net.lostsocket.ld42.components.MachineGun;
+import net.lostsocket.ld42.components.Shotgun;
 import net.lostsocket.ld42.components.SpriteComponent;
+import net.lostsocket.ld42.components.Weapon;
 
 public class Player extends Mortal{
 	
 	public static Player instance;
 	public float speed = 100;
 	
-	private Handgun handgun;
-	
 	private SpriteComponent aliveSprite;
 	private SpriteComponent deadSprite;
+
+	private Weapon weapons[];
+	private Weapon currentWeapon;
+	public int weaponIndex = 0;
 	
 	public Player() {
 		super(100, 7);
@@ -28,17 +33,35 @@ public class Player extends Mortal{
 		
 		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 1);
 		
-		handgun = new Handgun();
-		addComponent(handgun);
+		weapons = new Weapon[] {new Handgun(), new Shotgun(), new MachineGun()};
 		
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
 		transform.position.y = Gdx.graphics.getHeight() / 2 - 16;
+		
+		equipWeapon(0);
 	}
-
+	
+	public boolean areThereMoreWeapons() {
+		return weaponIndex < weapons.length -1;
+	}
+	
+	public void tryFindWeapon() {
+		if(areThereMoreWeapons()) {
+			weaponIndex++;
+			equipWeapon(weaponIndex);
+		}
+	}
+	
+	public void equipWeapon(int index) {
+		weaponIndex = index;
+		currentWeapon = weapons[index];
+		currentWeapon.setOwner(this);
+	}
+	
 	@Override
 	public void customUpdate(float delta) {
 		
-		if(!isAlive)
+		if(!isAlive || GameManager.instance.currentState != GameManager.GameState.PLAYING)
 			return;
 		
 		lookAtMouse();
@@ -57,10 +80,11 @@ public class Player extends Mortal{
 	
 		if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT) ){
 			transform.moveRight(speed * delta);	
-			health = 0;
 		}
 		
 		ensurePlayerInMap();
+		
+		currentWeapon.update(delta);
 	}
 	
 	private void ensurePlayerInMap() {

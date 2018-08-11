@@ -29,8 +29,8 @@ public class Zombie extends Mortal{
 		if(growl == null)
 			loadSounds(); 
 		
-		transform.position.x = Maths.getRandomBetween(-2000, 2000);
-		transform.position.y = Maths.getRandomBetween(-2000, 2000);
+		transform.position.x = Player.instance.transform.position.x + (Maths.getRandomFloat(0, 1) > 0.5 ?  Maths.getRandomFloat(-700, -400) : Maths.getRandomFloat(400, 700));
+		transform.position.y = Player.instance.transform.position.y + (Maths.getRandomFloat(0, 1) > 0.5 ?  Maths.getRandomFloat(-700, -400) : Maths.getRandomFloat(400, 700));
 		
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 0);
 		addComponent(aliveSprite);
@@ -71,10 +71,14 @@ public class Zombie extends Mortal{
 	@Override
 	public void onCollision(Entity other) {
 		if(isAlive && other instanceof Bullet) {
-			health -= 20;
+			
+			Bullet b = (Bullet) other;
+			health -= b.damage;
+			
 			hit.play(Maths.getRandomFloat(0.5f, 0.8f),
 					Maths.getRandomFloat(0.95f, 1.05f),
 					0);
+			
 		}
 		
 		if(other instanceof Zombie) {

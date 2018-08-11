@@ -90,10 +90,15 @@ public class UIButton extends UI{
 	}
 
 	public void setEnabled(boolean isEnabled) {
+		
 		currentStatus = isEnabled ? currentStatus.NORMAL : currentStatus.DISABLED; 
 	}
 	
 	public void setSelected(boolean isSelected) {
+		if(currentStatus == currentStatus.DISABLED)
+			return;
+		
 		currentStatus = isSelected ? currentStatus.SELECTED : currentStatus.NORMAL; 
 	}
+
 }

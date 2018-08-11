@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import net.lostsocket.ld42.GameManager;
+import net.lostsocket.ld42.entities.Player;
+
 public class WaveCompletedUI extends UI {
 
 	private Texture waveScreen = new Texture("WaveSurvived.png");
@@ -38,6 +41,8 @@ public class WaveCompletedUI extends UI {
 				setCurrentAction(Action.FIND_WEAPON);
 			}
 		});
+		
+		btnFindWeapon.setEnabled(Player.instance.areThereMoreWeapons());
 		
 		btnBodies = new UIButton("BtnBodies", middleX + 200, 310);
 		btnBodies.setCallback(new UIButtonClick() {
@@ -93,6 +98,7 @@ public class WaveCompletedUI extends UI {
 		case HEAL:
 			break;
 		case FIND_WEAPON:
+			Player.instance.tryFindWeapon();
 			break;
 		case REMOVE_BODIES:
 			break;
@@ -101,6 +107,7 @@ public class WaveCompletedUI extends UI {
 		default:
 			break;
 		}
+		GameManager.instance.nextWaveLogic();
 	}
 	
 	private void disableOtherButtons() {
