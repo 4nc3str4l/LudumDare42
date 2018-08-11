@@ -3,6 +3,7 @@ package net.lostsocket.ld42.entities;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
 
 import net.lostsocket.ld42.components.AbstractComponent;
 import net.lostsocket.ld42.components.IRenderable;
@@ -21,6 +22,12 @@ public abstract class Entity
 	
 	public Transform transform = new Transform();
 	
+	public Circle collision;
+	
+	public Entity(float radius) {
+		collision = new Circle(transform.position.x, transform.position.y, radius);
+	}
+	
 	public AbstractComponent addComponent(AbstractComponent component) {
 		component.setOwner(this);
 		
@@ -38,6 +45,7 @@ public abstract class Entity
 	public abstract void customUpdate(float delta); 
 	
 	public void tick(float delta) {
+		collision.setPosition(transform.position.x, transform.position.y);
 		customUpdate(delta);
 		for(IUpdatable updatable : updatables) {
 			updatable.update(delta);
@@ -49,4 +57,10 @@ public abstract class Entity
 			renderable.render(batch);
 		}
 	}
+	
+	public boolean isCollidingWith(Entity other) {
+		return collision.overlaps(other.collision);
+	}
+	
+	public abstract void onCollision(Entity other);
 }

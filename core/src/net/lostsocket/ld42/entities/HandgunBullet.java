@@ -9,11 +9,11 @@ import net.lostsocket.ld42.components.TimedDestroyComponent;
 public class HandgunBullet extends Entity {
 	
 	private final float SPEED = 1000f;
-	
 	private Entity owner;
 	
 	public HandgunBullet(Entity owner) {
-		this.owner = this;
+		super(3);
+		this.owner = owner;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 3));
 		addComponent(new TimedDestroyComponent(1f));
 		transform.position = new Vector2(owner.transform.position);
@@ -23,5 +23,12 @@ public class HandgunBullet extends Entity {
 	@Override
 	public void customUpdate(float delta) {
 		transform.moveForward(SPEED * delta);
+	}
+
+	@Override
+	public void onCollision(Entity other) {
+		if(other instanceof Zombie) {
+			isDestroyed = true;
+		}
 	}
 }

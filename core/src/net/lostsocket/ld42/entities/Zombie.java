@@ -9,6 +9,7 @@ public class Zombie extends Entity{
 	public float speed = 40;
 	
 	public Zombie() {
+		super(7);
 		transform.position.x = Maths.getRandomBetween(-2000, 2000);
 		transform.position.y = Maths.getRandomBetween(-2000, 2000);
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 0));
@@ -24,5 +25,9 @@ public class Zombie extends Entity{
 				Player.instance.transform.position.y);
 		
 		transform.moveForward(speed * delta);
+	}
+
+	@Override
+	public void onCollision(Entity other) {
 	}
 }

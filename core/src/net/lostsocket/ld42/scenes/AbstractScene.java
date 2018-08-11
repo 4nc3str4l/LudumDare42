@@ -15,6 +15,8 @@ public abstract class AbstractScene {
 	
 	public void tick(float delta) {
 		
+		processCollisions();
+		
 		Entity e;
 		for(int i = entities.size() -1; i >= 0; --i) {
 			e = entities.get(i);
@@ -30,7 +32,22 @@ public abstract class AbstractScene {
 		}
 		
 		entitiesToAdd.clear();
-		
+
+	}
+	
+	public void processCollisions() {
+		Entity e1, e2;
+		for(int i = 0; i < entities.size(); ++i) {
+			e1 = entities.get(i);
+			for(int j = 0; j < entities.size(); ++j) {
+				if(i != j) {
+					e2 = entities.get(j);
+					if(e1.isCollidingWith(e2)) {
+						e1.onCollision(e2);
+					}
+				}
+			}
+		}
 	}
 	
 	public void render(SpriteBatch batch){

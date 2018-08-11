@@ -15,6 +15,7 @@ public class Player extends Entity{
 	private Handgun handgun;
 	
 	public Player() {
+		super(7);
 		instance = this;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 1));
 		
@@ -46,6 +47,11 @@ public class Player extends Entity{
 	
 	private void lookAtMouse() {
 		transform.lookAt(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+	}
+
+	@Override
+	public void onCollision(Entity other) {
+	
 	}
 	
 }
