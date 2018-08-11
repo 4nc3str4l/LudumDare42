@@ -13,16 +13,18 @@ import net.lostsocket.ld42.ui.GameOverUI;
 import net.lostsocket.ld42.ui.InGameUI;
 import net.lostsocket.ld42.ui.StartGameUI;
 import net.lostsocket.ld42.ui.UI;
+import net.lostsocket.ld42.ui.WaveCompletedUI;
 
 public class GameManager extends Entity {
 	
 	public static GameManager instance;
+	private final int ZOMBIES_MULT = 1;
 
 	private int wave = 1;
 	private int nZombiesAlive = 0;
 	private int totalNumKills = 0;
 	
-	private enum GameState { NOT_STARTED, PLAYING, GAME_OVER }
+	private enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
 	private GameState currentState = GameState.NOT_STARTED;
 	
 	private UI currentUI;
@@ -35,6 +37,7 @@ public class GameManager extends Entity {
 
 	@Override
 	public void customUpdate(float delta) {
+		
 		if(currentState == GameState.NOT_STARTED) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 				restartGame();
@@ -47,6 +50,9 @@ public class GameManager extends Entity {
 				SceneManager.loadScene(new GameScene());
 			}
 		}
+		
+		if(currentUI != null)
+			currentUI.update(delta);
 	}
 	
 	public void restartGame() {
@@ -65,7 +71,8 @@ public class GameManager extends Entity {
 		++totalNumKills;
 		
 		if(nZombiesAlive == 0) {
-			nextWaveLogic();
+			currentState = GameState.WAVE_SURVIVED;
+			changeUI(new WaveCompletedUI());
 		}
 	}
 	
@@ -76,7 +83,7 @@ public class GameManager extends Entity {
 	
 	private void nextWaveLogic() {
 		++wave;
-		nZombiesAlive = wave * 5;
+		nZombiesAlive = wave * ZOMBIES_MULT;
 		spawnZombies(nZombiesAlive);
 	}
 	

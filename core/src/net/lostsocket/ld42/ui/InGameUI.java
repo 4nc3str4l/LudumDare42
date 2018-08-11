@@ -29,4 +29,11 @@ public class InGameUI extends UI{
 		bottonRect.dispose();
 		waveRect.dispose();
 	}
+
+
+	@Override
+	public void update(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
 }
