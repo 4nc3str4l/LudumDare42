@@ -11,6 +11,7 @@ import net.lostsocket.ld42.components.MachineGun;
 import net.lostsocket.ld42.components.Shotgun;
 import net.lostsocket.ld42.components.SpriteComponent;
 import net.lostsocket.ld42.components.Weapon;
+import net.lostsocket.ld42.maths.Maths;
 
 public class Player extends Mortal{
 	
@@ -49,11 +50,17 @@ public class Player extends Mortal{
 		return weaponIndex < weapons.length -1;
 	}
 	
-	public void tryFindWeapon() {
-		if(areThereMoreWeapons()) {
-			weaponIndex++;
-			equipWeapon(weaponIndex);
+	public String tryFindWeapon() {
+		if(Maths.getRandomFloat(0, 1) > 0.5) {
+			if(areThereMoreWeapons()) {
+				weaponIndex++;
+				equipWeapon(weaponIndex);
+			}
+			return "You found a " + currentWeapon.name + " hidden on the forest!";
+		}else {
+			return "You explored the forest but no weapons found...";
 		}
+
 	}
 	
 	public void equipWeapon(int index) {
@@ -142,6 +149,11 @@ public class Player extends Mortal{
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
 		GameManager.instance.onPlayerDead();
+	}
+	
+	public String heal() {
+		health = maxHealth;
+		return "After some rest you are fully recovered!";
 	}
 	
 }

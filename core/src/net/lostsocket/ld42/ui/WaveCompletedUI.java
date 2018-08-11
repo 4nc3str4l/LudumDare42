@@ -1,7 +1,10 @@
 package net.lostsocket.ld42.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.GameManager;
@@ -10,6 +13,12 @@ import net.lostsocket.ld42.entities.Player;
 public class WaveCompletedUI extends UI {
 
 	private Texture waveScreen = new Texture("WaveSurvived.png");
+	private Texture spaceToContinue = new Texture("space_to_continue.png");
+	
+	private BitmapFont font = new BitmapFont();
+	
+	private enum ScreenStatus { CHOOSING_ACTION, ACTION_COMPLETE}
+	private ScreenStatus currentScreenStatus = ScreenStatus.CHOOSING_ACTION;
 	
 	private enum Action { UPGRADE, FIND_WEAPON, REMOVE_BODIES, FIND_SURVIVORS, HEAL, NONE }
 	private Action currentAction = Action.NONE;
@@ -20,6 +29,8 @@ public class WaveCompletedUI extends UI {
 	private UIButton btnBtnHeal;
 	private UIButton btnSurvivors;
 	private UIButton btnConfirm;
+	
+	private String currentMessage = "";
 	
 	public WaveCompletedUI() {
 		int middleX = Gdx.graphics.getWidth() / 2 - 168 / 2;
@@ -96,19 +107,21 @@ public class WaveCompletedUI extends UI {
 		case FIND_SURVIVORS:
 			break;
 		case HEAL:
+			currentMessage = Player.instance.heal();
 			break;
 		case FIND_WEAPON:
-			Player.instance.tryFindWeapon();
+			currentMessage = Player.instance.tryFindWeapon();
 			break;
 		case REMOVE_BODIES:
 			break;
 		case UPGRADE:
-			Player.instance.currentWeapon.levelUP();
+			currentMessage = Player.instance.currentWeapon.levelUP();
 			break;
 		default:
 			break;
 		}
-		GameManager.instance.nextWaveLogic();
+		
+		currentScreenStatus = ScreenStatus.ACTION_COMPLETE;
 	}
 	
 	private void disableOtherButtons() {
@@ -123,23 +136,37 @@ public class WaveCompletedUI extends UI {
 	
 	@Override
 	public void update(float delta) {
-		btnUpgrade.update(delta);
-		btnFindWeapon.update(delta);
-		btnBodies.update(delta);
-		btnBtnHeal.update(delta);
-		btnSurvivors.update(delta);
-		btnConfirm.update(delta);
+		if(currentScreenStatus == ScreenStatus.CHOOSING_ACTION) {
+			btnUpgrade.update(delta);
+			btnFindWeapon.update(delta);
+			btnBodies.update(delta);
+			btnBtnHeal.update(delta);
+			btnSurvivors.update(delta);
+			btnConfirm.update(delta);
+		}else {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+				GameManager.instance.nextWaveLogic();
+			}
+		}
+
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
 		batch.draw(waveScreen, 0, 0);
-		btnBodies.render(batch);
-		btnFindWeapon.render(batch);
-		btnBtnHeal.render(batch);
-		btnSurvivors.render(batch);
-		btnUpgrade.render(batch);
-		btnConfirm.render(batch);
+		if(currentScreenStatus == ScreenStatus.CHOOSING_ACTION) {
+			btnBodies.render(batch);
+			btnFindWeapon.render(batch);
+			btnBtnHeal.render(batch);
+			btnSurvivors.render(batch);
+			btnUpgrade.render(batch);
+			btnConfirm.render(batch);
+		}else {
+			font.getData().setScale(1);
+			font.setColor(Color.GREEN);
+			font.draw(batch, currentMessage, 310, Gdx.graphics.getHeight() / 2);
+			batch.draw(spaceToContinue, 0, 80);
+		}
 	}
 
 	@Override
@@ -151,6 +178,8 @@ public class WaveCompletedUI extends UI {
 		btnSurvivors.dispose();
 		btnUpgrade.dispose();
 		btnConfirm.dispose();
+		font.dispose();
+		spaceToContinue.dispose();
 	}
 
 

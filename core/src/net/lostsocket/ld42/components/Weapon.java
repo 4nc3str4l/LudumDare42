@@ -61,12 +61,14 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	
 	protected abstract void levelUpLogic(int newLevel);
 	
-	public void levelUP() {
+	public String levelUP() {
 		
 		if(currentWeaponLevel == MAX_WEAPON_LEVEL)
-			return;
-		
+			return "You have reached the maximum level!";
+			
 		++currentWeaponLevel;
 		levelUpLogic(currentWeaponLevel);
+		
+		return "Congratulations your " + name + " is now level " + currentWeaponLevel + "!";
 	}
 }
