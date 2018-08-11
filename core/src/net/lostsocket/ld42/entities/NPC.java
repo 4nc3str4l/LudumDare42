@@ -42,12 +42,6 @@ public class NPC extends Mortal {
 
 		health = 100;
 		maxHealth = 100;
-
-		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 1);
-		addComponent(aliveSprite);
-
-		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 1);
-
 		weapons = new Weapon[] { new Handgun(), new Shotgun(), new MachineGun() };
 
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
@@ -55,6 +49,11 @@ public class NPC extends Mortal {
 
 		chooseRandomBehaviour();
 		equipWeapon(Maths.getRandomBetween(0, 3));
+		
+		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, choosenBehaviour * 2 + 2, 1);
+		addComponent(aliveSprite);
+
+		deadSprite = new SpriteComponent(RunningOutOfSpace.img, choosenBehaviour * 2 + 3, 1);
 	}
 	
 	private void chooseRandomBehaviour() {
@@ -118,7 +117,7 @@ public class NPC extends Mortal {
 				float ammount = -5;
 				transform.position.add(pushDirection.scl(ammount));
 				if (z.isAlive) {
-					health -= 1;
+					health -= 5;
 				}	
 			}
 		}else if(other instanceof NPC) {

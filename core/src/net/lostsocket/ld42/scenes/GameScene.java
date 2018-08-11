@@ -33,7 +33,7 @@ public class GameScene extends AbstractScene{
 		}else {
 			lightMask.setPosition(0, 0);
 		}
-		lightMask.draw(batch, 0.2f);
+		lightMask.draw(batch, 0.05f + 0.2f * (1 - GameManager.instance.nZombiesAlive / (float)GameManager.instance.initialZombies));
 		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		
 		GameManager.instance.renderUI(batch);

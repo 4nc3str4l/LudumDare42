@@ -26,8 +26,10 @@ public class GameManager extends Entity {
 	private final int ZOMBIES_MULT = 2;
 
 	private int wave = 1;
-	private int nZombiesAlive = 0;
+	public int nZombiesAlive = 0;
+	public int initialZombies;
 	private int totalNumKills = 0;
+	
 	
 	public enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
 	public GameState currentState = GameState.NOT_STARTED;
@@ -99,7 +101,7 @@ public class GameManager extends Entity {
 		case NPC.COWARD:
 			return "You found a Survivor, be carefull he looks a bit coward";
 		case NPC.SNIPER:
-			return "You found an Sniper from the Rusian army";
+			return "You found an Sniper from some random army (you feel safe)";
 		default:
 			return "";
 		}
@@ -125,7 +127,9 @@ public class GameManager extends Entity {
 	public void nextWaveLogic() {
 		++wave;
 		currentState = GameState.PLAYING;
-		nZombiesAlive = wave * ZOMBIES_MULT;
+		initialZombies = wave * ZOMBIES_MULT;
+		nZombiesAlive = initialZombies;
+		
 		spawnZombies(nZombiesAlive);
 		changeUI(new InGameUI());
 		remainingTimeWarmingUp = WARMUP_TIME;

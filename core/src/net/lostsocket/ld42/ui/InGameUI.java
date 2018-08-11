@@ -18,17 +18,17 @@ public class InGameUI extends UI{
 	@Override
 	public void render(SpriteBatch batch) {
 		batch.draw(waveRect, Gdx.graphics.getWidth() / 2 - 40, Gdx.graphics.getHeight()- 32);
-		font.draw(batch, "Wave: " + GameManager.instance.getWave(), Gdx.graphics.getWidth() / 2 - 15, Gdx.graphics.getHeight() - 10);
+		font.draw(batch, "Night: " + GameManager.instance.getWave(), Gdx.graphics.getWidth() / 2 - 15, Gdx.graphics.getHeight() - 10);
 		
 		batch.draw(bottonRect, 0, 0);
 		
 		font.draw(batch, "Kills: " + GameManager.instance.getTotalNumKills(), 10, 25);
 		
 		font.setColor(Color.RED);
-		font.draw(batch, "Health: " + Player.instance.health, 70, 25);
+		font.draw(batch, "Health: " + Player.instance.health, 120, 25);
 	
 		font.setColor(Color.WHITE);
-		font.draw(batch, "Current Weapon: " + Player.instance.currentWeapon.name, 170, 25);
+		font.draw(batch, "Current Weapon: " + Player.instance.currentWeapon.name, 270, 25);
 	}
 
 

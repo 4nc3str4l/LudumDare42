@@ -139,7 +139,7 @@ public class Player extends Mortal{
 			float ammount = z.isAlive ? -5 : -2;
 			transform.position.add(pushDirection.scl(ammount));
 			if(z.isAlive) {
-				health -= 1;
+				health -= 10;
 			}
 		}
 	}
