@@ -32,7 +32,8 @@ public class GameManager extends Entity {
 	public GameManager() {
 		super(0);
 		instance = this;
-		changeUI(new StartGameUI());
+		//changeUI(new StartGameUI());
+		changeUI(new WaveCompletedUI());
 	}
 
 	@Override

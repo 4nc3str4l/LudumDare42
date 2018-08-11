@@ -17,4 +17,8 @@ public class StartGameUI extends UI {
 		startScreen.dispose();
 	}
 
+	@Override
+	public void update(float delta) {
+	}
+
 }
