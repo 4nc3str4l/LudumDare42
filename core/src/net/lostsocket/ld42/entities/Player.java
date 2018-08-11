@@ -44,6 +44,26 @@ public class Player extends Mortal{
 		if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT) ){
 			transform.moveRight(speed * delta);	
 		}
+		
+		ensurePlayerInMap();
+	}
+	
+	private void ensurePlayerInMap() {
+		if(transform.position.x < 3) {
+			transform.position.x = 3;
+		}
+		
+		if(transform.position.x > Gdx.graphics.getWidth() - 25) {
+			transform.position.x = Gdx.graphics.getWidth() - 25;
+		}
+		
+		if(transform.position.y < 3) {
+			transform.position.y = 3;
+		}
+		
+		if(transform.position.y > Gdx.graphics.getHeight() - 25) {
+			transform.position.y = Gdx.graphics.getHeight() - 25;
+		}
 	}
 	
 	private void lookAtMouse() {

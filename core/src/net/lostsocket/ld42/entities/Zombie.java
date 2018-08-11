@@ -2,6 +2,7 @@ package net.lostsocket.ld42.entities;
 
 import com.badlogic.gdx.math.Vector2;
 
+import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.RunningOutOfSpace;
 import net.lostsocket.ld42.components.SpriteComponent;
 import net.lostsocket.ld42.maths.Maths;
@@ -59,5 +60,6 @@ public class Zombie extends Mortal{
 		collision.radius = 10;
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
+		GameManager.instance.onZombieDead();
 	}
 }
