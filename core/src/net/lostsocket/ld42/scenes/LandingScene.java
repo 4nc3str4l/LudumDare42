@@ -10,7 +10,7 @@ public class LandingScene extends AbstractScene{
 	}
 
 	@Override
-	public void dispose() {
+	public void customDispose() {
 		System.out.println("Landing Scene Disposed!");
 	}
 

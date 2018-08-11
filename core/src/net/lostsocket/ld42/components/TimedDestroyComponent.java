@@ -15,4 +15,8 @@ public class TimedDestroyComponent extends AbstractComponent implements IUpdatab
 		if(remainingTime <= 0)
 			owner.isDestroyed = true;
 	}
+
+	@Override
+	public void dispose() {
+	}
 }

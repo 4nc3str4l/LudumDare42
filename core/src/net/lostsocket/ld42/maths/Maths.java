@@ -10,4 +10,7 @@ public class Maths {
 		return rand.nextInt(max - min) + min;
 	}
 	
+	public static float getRandomFloat(float min, float max) {
+		return rand.nextFloat() * (max - min) + min;
+	}
 }

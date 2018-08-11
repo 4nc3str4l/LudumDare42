@@ -10,8 +10,10 @@ public abstract class AbstractScene {
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Entity> entitiesToAdd = new ArrayList<Entity>();
+	
 	public abstract void load();
-	public abstract void dispose();
+	protected abstract void customDispose();
+	
 	
 	public void tick(float delta) {
 		
@@ -64,4 +66,13 @@ public abstract class AbstractScene {
 		newEntity.currentScene = this;
 		entitiesToAdd.add(newEntity);
 	}
+	
+	public void dispose() {
+		customDispose();
+		
+		for(Entity entity : entities) {
+			entity.dispose();
+		}
+	}
+	
 }

@@ -1,6 +1,7 @@
 package net.lostsocket.ld42.components;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 
 import net.lostsocket.ld42.entities.HandgunBullet;
 import net.lostsocket.ld42.entities.Player;
@@ -8,6 +9,12 @@ import net.lostsocket.ld42.entities.Player;
 public class Handgun extends AbstractComponent implements IUpdatable{
 	
 	private boolean isMouseDown = false;
+	
+	private Sound sound;
+	
+	public Handgun() {
+		sound = Gdx.audio.newSound(Gdx.files.internal("sounds/handgun_shot.wav"));
+	}
 	
 	@Override
 	public void update(float delta) {
@@ -22,6 +29,12 @@ public class Handgun extends AbstractComponent implements IUpdatable{
 	}
 	
 	public void shoot(){
+		sound.play();
 		owner.currentScene.addEntity(new HandgunBullet(owner));
+	}
+
+	@Override
+	public void dispose() {
+		sound.dispose();
 	}
 }

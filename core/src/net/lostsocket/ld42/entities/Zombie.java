@@ -1,9 +1,12 @@
 package net.lostsocket.ld42.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.RunningOutOfSpace;
+import net.lostsocket.ld42.components.RandomSound;
 import net.lostsocket.ld42.components.SpriteComponent;
 import net.lostsocket.ld42.maths.Maths;
 
@@ -14,15 +17,30 @@ public class Zombie extends Mortal{
 	private SpriteComponent aliveSprite;
 	private SpriteComponent deadSprite;
 	
+	private RandomSound growlSoundManager;
+	
+	public static Sound growl = null;
+	
 	public Zombie() {
 		super(100, 7);
+		
+		if(growl == null)
+			loadSounds(); 
+		
 		transform.position.x = Maths.getRandomBetween(-2000, 2000);
 		transform.position.y = Maths.getRandomBetween(-2000, 2000);
 		
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 0);
 		addComponent(aliveSprite);
 		
+		growlSoundManager = new RandomSound(growl, 5, 20, false);
+		addComponent(growlSoundManager);
+		
 		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 0);
+	}
+	
+	private void loadSounds() {
+		growl = Gdx.audio.newSound(Gdx.files.internal("sounds/zombie.wav"));
 	}
 	
 	@Override
@@ -68,6 +86,7 @@ public class Zombie extends Mortal{
 		collision.radius = 10;
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
+		removeComponent(growlSoundManager);
 		GameManager.instance.onZombieDead();
 	}
 }

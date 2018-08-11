@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.entities.MapBackground;
 import net.lostsocket.ld42.entities.Player;
+import net.lostsocket.ld42.entities.Zombie;
 
 public class GameScene extends AbstractScene{
 
@@ -20,14 +21,6 @@ public class GameScene extends AbstractScene{
 		System.out.println("Game Scene Loaded!");
 		addEntity(new GameManager());
 		addEntity(new MapBackground(bgTexture));
-	}
-
-	@Override
-	public void dispose() {
-		System.out.println("Game Scene Disposed!");
-		bgTexture.dispose();
-		bgForest.dispose();
-		lightMask.getTexture().dispose();
 	}
 
 	@Override
@@ -44,6 +37,15 @@ public class GameScene extends AbstractScene{
 		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		
 		GameManager.instance.renderUI(batch);
+	}
+	
+	@Override
+	public void customDispose() {
+		System.out.println("Game Scene Disposed!");
+		bgTexture.dispose();
+		bgForest.dispose();
+		lightMask.getTexture().dispose();
+		Zombie.growl.dispose();
 	}
 }
  

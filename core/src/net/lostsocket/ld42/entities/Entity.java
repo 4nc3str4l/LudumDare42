@@ -75,5 +75,10 @@ public abstract class Entity
 		return collision.overlaps(other.collision);
 	}
 	
+	public void dispose() {
+		for(IUpdatable updatable : updatables) 
+			updatable.dispose();
+	}
+	
 	public abstract void onCollision(Entity other);
 }
