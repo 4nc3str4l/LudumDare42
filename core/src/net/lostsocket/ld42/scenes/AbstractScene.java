@@ -50,10 +50,14 @@ public abstract class AbstractScene {
 		}
 	}
 	
+	public abstract void customRender(SpriteBatch batch);
+	
 	public void render(SpriteBatch batch){
 		for(Entity entity : entities) {
 			entity.render(batch);
 		}
+		
+		customRender(batch);
 	}
 	
 	public void addEntity(Entity newEntity) {
