@@ -18,6 +18,8 @@ public class UIButton extends UI{
 	private Texture currentTexture;
 	private Rectangle rect;
 	
+	private UIButtonClick callBack;
+	
 	public UIButton(String name, int posX, int posY) {
 		normal = new Texture(name + "/btn.png");
 		selected = new Texture(name + "/selected.png");
@@ -25,7 +27,11 @@ public class UIButton extends UI{
 		rect = new Rectangle(posX, posY, normal.getWidth(), normal.getHeight());
 		currentTexture = normal;
 	}
-
+	
+	public void setCallback(UIButtonClick callback) {
+		this.callBack = callback;
+	}
+	
 	@Override
 	public void update(float delta) {
 		
@@ -47,6 +53,7 @@ public class UIButton extends UI{
 	
 	private void onButtonClick() {
 		System.out.println("Button Clicked!");
+		callBack.onButtonClick();
 	}
 	
 	@Override
@@ -80,5 +87,13 @@ public class UIButton extends UI{
 	public void setPosition(int x, int y) {
 		rect.x = x;
 		rect.y = y;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		currentStatus = isEnabled ? currentStatus.NORMAL : currentStatus.DISABLED; 
+	}
+	
+	public void setSelected(boolean isSelected) {
+		currentStatus = isSelected ? currentStatus.SELECTED : currentStatus.NORMAL; 
 	}
 }
