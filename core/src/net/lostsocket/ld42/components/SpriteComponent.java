@@ -20,7 +20,15 @@ public class SpriteComponent extends AbstractComponent implements IRenderable {
 
 	@Override
 	public void render(SpriteBatch _batch) {
-		_batch.draw(region, 100, 100, Constants.SPRITE_WIDTH / 2, Constants.SPRITE_HEIGHT / 2, Constants.SPRITE_WIDTH, Constants.SPRITE_HEIGHT, 1, 1, 0);
+		_batch.draw(region, owner.transform.position.x,
+				owner.transform.position.y,
+				Constants.SPRITE_WIDTH / 2,
+				Constants.SPRITE_HEIGHT / 2,
+				Constants.SPRITE_WIDTH,
+				Constants.SPRITE_HEIGHT,
+				owner.transform.scale.x,
+				owner.transform.scale.y,
+				owner.transform.rotation);
 	}
 
 }

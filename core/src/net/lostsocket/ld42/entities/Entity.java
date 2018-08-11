@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.lostsocket.ld42.components.AbstractComponent;
 import net.lostsocket.ld42.components.IRenderable;
 import net.lostsocket.ld42.components.IUpdatable;
+import net.lostsocket.ld42.maths.Transform;
 
 public abstract class Entity 
 {
@@ -14,6 +15,8 @@ public abstract class Entity
 	
 	private ArrayList<IRenderable> renderables = new ArrayList<IRenderable>();
 	private ArrayList<IUpdatable> updatables = new ArrayList<IUpdatable>();
+	
+	public Transform transform = new Transform();
 	
 	public void addComponent(AbstractComponent component) {
 		component.setOwner(this);
@@ -27,7 +30,10 @@ public abstract class Entity
 		}
 	}
 	
+	public abstract void customUpdate(float delta); 
+	
 	public void tick(float delta) {
+		customUpdate(delta);
 		for(IUpdatable updatable : updatables) {
 			updatable.update(delta);
 		}
