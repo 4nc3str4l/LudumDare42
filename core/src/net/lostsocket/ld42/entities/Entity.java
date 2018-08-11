@@ -16,6 +16,8 @@ public abstract class Entity
 	private ArrayList<IUpdatable> updatables = new ArrayList<IUpdatable>();
 	
 	public void addComponent(AbstractComponent component) {
+		component.setOwner(this);
+		
 		if(component instanceof IRenderable) {
 			renderables.add((IRenderable)component);
 		}
