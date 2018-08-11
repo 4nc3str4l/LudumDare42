@@ -98,7 +98,7 @@ public class Zombie extends Mortal{
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
 		removeComponent(growlSoundManager);
-		GameManager.instance.onZombieDead();
+		GameManager.instance.onZombieDead(this);
 		squish.play(Maths.getRandomFloat(0.5f, 0.8f),
 				Maths.getRandomFloat(0.95f, 1.05f),
 				0);

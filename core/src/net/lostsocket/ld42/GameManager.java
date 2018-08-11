@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.entities.Entity;
+import net.lostsocket.ld42.entities.NPC;
 import net.lostsocket.ld42.entities.Player;
 import net.lostsocket.ld42.entities.Zombie;
 import net.lostsocket.ld42.maths.Maths;
@@ -34,7 +35,8 @@ public class GameManager extends Entity {
 	public final float WARMUP_TIME = 1.0f;
 	private float remainingTimeWarmingUp = 1.0f;
 	
-	private ArrayList<Zombie> spawnedZombies = new ArrayList<Zombie>();
+	public ArrayList<Zombie> spawnedZombies = new ArrayList<Zombie>();
+	public ArrayList<Zombie> aliveZombies = new ArrayList<Zombie>();
 	
 	private UI currentUI;
 	
@@ -42,7 +44,6 @@ public class GameManager extends Entity {
 		super(0);
 		instance = this;
 		changeUI(new StartGameUI());
-		//changeUI(new WaveCompletedUI());
 	}
 
 	@Override
@@ -74,15 +75,22 @@ public class GameManager extends Entity {
 		nZombiesAlive = 0;
 		totalNumKills = 0;
 		currentScene.addEntity(new Player());
+		spawnNPC();
 		currentState = GameState.PLAYING;
 		changeUI(new InGameUI());
 		remainingTimeWarmingUp = WARMUP_TIME;
 		spawnedZombies.clear();
+		aliveZombies.clear();
 		nextWaveLogic();
 	}
 	
-	public void onZombieDead() {
+	public void spawnNPC() {
+		currentScene.addEntity(new NPC());
+	}
+	
+	public void onZombieDead(Zombie z) {
 		
+		aliveZombies.remove(z);
 		--nZombiesAlive;
 		++totalNumKills;
 		
@@ -110,6 +118,7 @@ public class GameManager extends Entity {
 		for(int i = 0; i < amount; ++i) {
 			Zombie z = new Zombie();
 			spawnedZombies.add(z);
+			aliveZombies.add(z);
 			currentScene.addEntity(z);
 		}
 		System.out.println("Spawned Zombies Size " + spawnedZombies.size());

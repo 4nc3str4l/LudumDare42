@@ -20,6 +20,8 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 
 	public String name;
 	
+	public boolean isForNPC = false;
+	
 	public Weapon(String soundPath) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(soundPath));
 	}
@@ -35,6 +37,9 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 			return;
 		}
 		
+		if(isForNPC)
+			return;
+		
 		if(Gdx.input.isButtonPressed(0) && Player.instance.isAlive){
 			if(!isMouseDown) {
 				sound.play();
@@ -46,6 +51,16 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 			isMouseDown = false;
 		}
 		
+	}
+	
+	public void tryShootNPC() {
+		
+		if(timeUntilNextShoot > 0)
+			return;
+
+		sound.play();
+		timeUntilNextShoot = shootRate;
+		shoot();
 	}
 	
 	public abstract void shoot();
