@@ -44,6 +44,17 @@ public abstract class Entity
 		return component;
 	}
 	
+	public void removeComponent(AbstractComponent component) {
+		
+		if(component instanceof IRenderable) {
+			renderables.remove((IRenderable)component);
+		}
+		
+		if(component instanceof IUpdatable) {
+			updatables.remove((IUpdatable)component);
+		}
+	}
+	
 	public abstract void customUpdate(float delta); 
 	
 	public void tick(float delta) {

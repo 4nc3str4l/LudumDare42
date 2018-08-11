@@ -8,16 +8,24 @@ public class Zombie extends Mortal{
 	
 	public float speed = 40;
 	
+	private SpriteComponent aliveSprite;
+	private SpriteComponent deadSprite;
+	
 	public Zombie() {
 		super(100, 7);
 		transform.position.x = Maths.getRandomBetween(-2000, 2000);
 		transform.position.y = Maths.getRandomBetween(-2000, 2000);
-		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 0));
+		
+		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 0);
+		addComponent(aliveSprite);
+		
+		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 0);
 	}
 	
 	@Override
 	public void customUpdate(float delta) {
-		if(Player.instance == null)
+		
+		if(Player.instance == null || !isAlive)
 			return;
 		
 		transform.lookAt(
@@ -36,6 +44,8 @@ public class Zombie extends Mortal{
 
 	@Override
 	public void onDead() {
-		isDestroyed = true;
+		collision.radius = 10;
+		addComponent(deadSprite);
+		removeComponent(aliveSprite);
 	}
 }
