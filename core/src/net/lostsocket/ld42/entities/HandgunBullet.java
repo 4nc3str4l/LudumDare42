@@ -16,8 +16,8 @@ public class HandgunBullet extends Entity {
 		this.owner = owner;
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 3));
 		addComponent(new TimedDestroyComponent(1f));
-		transform.position = new Vector2(owner.transform.position);
 		transform.forward = new Vector2(owner.transform.forward);
+		transform.position = new Vector2(owner.transform.position).add(transform.forward.x * 20, transform.forward.y * 20);
 	}
 	
 	@Override

@@ -96,7 +96,9 @@ public class Player extends Mortal{
 			pushDirection.nor();
 			float ammount = z.isAlive ? -5 : -2;
 			transform.position.add(pushDirection.scl(ammount));
-			health -= 10;
+			if(z.isAlive) {
+				health -= 10;
+			}
 		}
 	}
 
