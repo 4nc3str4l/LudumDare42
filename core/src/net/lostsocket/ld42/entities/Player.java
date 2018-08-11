@@ -57,6 +57,7 @@ public class Player extends Mortal{
 	
 		if(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT) ){
 			transform.moveRight(speed * delta);	
+			health = 0;
 		}
 		
 		ensurePlayerInMap();
@@ -98,6 +99,7 @@ public class Player extends Mortal{
 			transform.position.add(pushDirection.scl(ammount));
 			if(z.isAlive) {
 				health -= 10;
+				
 			}
 		}
 	}

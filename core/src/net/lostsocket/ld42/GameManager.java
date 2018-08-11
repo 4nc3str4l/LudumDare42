@@ -9,7 +9,9 @@ import net.lostsocket.ld42.entities.Player;
 import net.lostsocket.ld42.entities.Zombie;
 import net.lostsocket.ld42.scenes.GameScene;
 import net.lostsocket.ld42.scenes.SceneManager;
+import net.lostsocket.ld42.ui.GameOverUI;
 import net.lostsocket.ld42.ui.InGameUI;
+import net.lostsocket.ld42.ui.StartGameUI;
 import net.lostsocket.ld42.ui.UI;
 
 public class GameManager extends Entity {
@@ -28,6 +30,7 @@ public class GameManager extends Entity {
 	public GameManager() {
 		super(0);
 		instance = this;
+		changeUI(new StartGameUI());
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class GameManager extends Entity {
 		}
 		
 		if(currentState == GameState.GAME_OVER) {
-			if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
 				SceneManager.loadScene(new GameScene());
 			}
 		}
@@ -68,6 +71,7 @@ public class GameManager extends Entity {
 	
 	public void onPlayerDead() {
 		currentState = GameState.GAME_OVER;
+		changeUI(new GameOverUI());
 	}
 	
 	private void nextWaveLogic() {
