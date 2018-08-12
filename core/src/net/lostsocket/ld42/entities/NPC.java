@@ -40,8 +40,8 @@ public class NPC extends Mortal {
 
 		super(100, 7);
 
-		health = 300;
-		maxHealth = 300;
+		health = 10000;
+		maxHealth = 10000;
 		weapons = new Weapon[] { new Handgun(), new Shotgun(), new MachineGun() };
 
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
