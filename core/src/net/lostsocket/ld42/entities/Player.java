@@ -2,6 +2,7 @@ package net.lostsocket.ld42.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import net.lostsocket.ld42.GameManager;
@@ -25,6 +26,9 @@ public class Player extends Mortal{
 	public Weapon currentWeapon;
 	public int weaponIndex = 0;
 	
+	public static Sound deadSound;
+	public static Sound hit;
+	
 	public Player() {
 		
 		super(100, 7);
@@ -42,6 +46,11 @@ public class Player extends Mortal{
 		
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
 		transform.position.y = Gdx.graphics.getHeight() / 2 - 16;
+		
+		if(deadSound == null) {
+			deadSound = Gdx.audio.newSound(Gdx.files.internal("res/sounds/human_death.wav"));
+			hit = Gdx.audio.newSound(Gdx.files.internal("res/sounds/hit_1.wav"));
+		}
 		
 		equipWeapon(0);
 	}
@@ -140,6 +149,9 @@ public class Player extends Mortal{
 			transform.position.add(pushDirection.scl(ammount));
 			if(z.isAlive) {
 				health -= 10;
+				hit.play(Maths.getRandomFloat(0, 0.5f),
+						Maths.getRandomFloat(0.85f, 1.15f),
+						0);
 			}
 		}
 	}
@@ -149,11 +161,11 @@ public class Player extends Mortal{
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
 		GameManager.instance.onPlayerDead();
+		deadSound.play();
 	}
 	
 	public String heal() {
 		health = maxHealth;
 		return "After some rest you are fully recovered!";
 	}
-	
 }

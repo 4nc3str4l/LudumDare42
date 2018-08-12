@@ -145,5 +145,6 @@ public class NPC extends Mortal {
 	public void onDead() {
 		addComponent(deadSprite);
 		removeComponent(aliveSprite);
+		Player.deadSound.play();
 	}
 }

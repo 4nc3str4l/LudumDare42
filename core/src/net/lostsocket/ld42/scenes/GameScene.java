@@ -46,6 +46,8 @@ public class GameScene extends AbstractScene{
 		bgForest.dispose();
 		lightMask.getTexture().dispose();
 		Zombie.disposeSounds();
+		Player.deadSound.dispose();
+		Player.hit.dispose();
 	}
 }
  
