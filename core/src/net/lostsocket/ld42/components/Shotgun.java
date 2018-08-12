@@ -10,6 +10,8 @@ public class Shotgun extends Weapon{
 		damage = 20;
 		shootRate = 1.0f;
 		name = "Shotgun";
+		magSize = 8;
+		numBullets = magSize;
 	}
 	
 	public void shoot(){
@@ -23,18 +25,22 @@ public class Shotgun extends Weapon{
 		case 2:
 			damage += 5;
 			shootRate -= 0.1f;
+			magSize += 1;
 			break; 
 		case 3:
 			damage += 5;
 			shootRate -= 0.05f;
+			magSize += 1;
 			break;
 		case 4:
 			damage += 5;
 			shootRate -= 0.05f;
+			magSize += 1;
 			break; 
 		case 5:
 			damage += 5;
 			shootRate -= 0.05f;
+			magSize += 1;
 			break;
 		}
 		

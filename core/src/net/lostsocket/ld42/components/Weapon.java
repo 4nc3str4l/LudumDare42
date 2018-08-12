@@ -1,6 +1,7 @@
 package net.lostsocket.ld42.components;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
 
 import net.lostsocket.ld42.GameManager;
@@ -12,10 +13,17 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	
 	private final int MAX_WEAPON_LEVEL = 5;
 	private int currentWeaponLevel = 1;
-	
+	public int magSize = 7;
+	public int numBullets;
+
 	private Sound sound;
+	private Sound reload;
+	private Sound noAmmo;
+	
 	protected float damage = 20;
 	public float shootRate = 1f;
+	public float reloadSpeed = 1f;
+	
 	private float timeUntilNextShoot = 0;
 
 	public String name;
@@ -24,6 +32,10 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	
 	public Weapon(String soundPath) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(soundPath));
+		reload = Gdx.audio.newSound(Gdx.files.internal("res/sounds/reloading.wav"));
+		noAmmo = Gdx.audio.newSound(Gdx.files.internal("res/sounds/noAmmo.wav"));
+		
+		numBullets = magSize;
 	}
 	
 	@Override
@@ -32,6 +44,12 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 		if(GameManager.instance.isWarmingUp())
 			return;
 		
+		if(Gdx.input.isKeyJustPressed(Keys.R)) {
+			numBullets = magSize;
+			reload.play();
+			timeUntilNextShoot = reloadSpeed;
+		}
+		
 		if(timeUntilNextShoot > 0) {
 			timeUntilNextShoot -= delta;
 			return;
@@ -39,13 +57,19 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 		
 		if(isForNPC)
 			return;
-		
+
 		if(Gdx.input.isButtonPressed(0) && Player.instance.isAlive){
 			if(!isMouseDown) {
-				sound.play();
-				isMouseDown = true;
+				if(numBullets > 0){
+					sound.play();
+					isMouseDown = true;
+
+					--numBullets;
+					shoot();
+				}else {
+					noAmmo.play();
+				}
 				timeUntilNextShoot = shootRate;
-				shoot();
 			}
 		}else {
 			isMouseDown = false;
@@ -68,6 +92,7 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	@Override
 	public void dispose() {
 		sound.dispose();
+		reload.dispose();
 	}
 	
 	public boolean isMaxLevel() {
@@ -83,7 +108,7 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 			
 		++currentWeaponLevel;
 		levelUpLogic(currentWeaponLevel);
-		
+		numBullets = magSize;
 		return "Congratulations your " + name + " is now level " + currentWeaponLevel + "!";
 	}
 	

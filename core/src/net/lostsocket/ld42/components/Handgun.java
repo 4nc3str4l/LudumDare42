@@ -9,6 +9,8 @@ public class Handgun extends Weapon{
 		this.shootRate = 0.5f;
 		damage = 20;
 		name = "Handgun";
+		magSize = 16;
+		numBullets = magSize;
 	}
 
 	public void shoot(){
@@ -21,18 +23,22 @@ public class Handgun extends Weapon{
 		case 2:
 			damage += 20;
 			shootRate -= 0.1f;
+			magSize += 4;
 			break; 
 		case 3:
 			damage += 10;
 			shootRate -= 0.05f;
+			magSize += 4;
 			break;
 		case 4:
 			damage += 10;
 			shootRate -= 0.05f;
+			magSize += 4;
 			break; 
 		case 5:
 			damage += 20;
 			shootRate -= 0.05f;
+			magSize += 4;
 			break;
 		}
 		

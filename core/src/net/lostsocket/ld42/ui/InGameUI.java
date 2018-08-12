@@ -14,6 +14,7 @@ public class InGameUI extends UI{
 	private BitmapFont font = new BitmapFont();
 	private Texture bottonRect = new Texture("res/BottomUIPannel.png");
 	private Texture waveRect = new Texture("res/WaveBG.png");
+	private Texture ammo = new Texture("res/ammo.png");
 	
 	@Override
 	public void render(SpriteBatch batch) {
@@ -29,6 +30,9 @@ public class InGameUI extends UI{
 	
 		font.setColor(Color.WHITE);
 		font.draw(batch, "Current Weapon: " + Player.instance.currentWeapon.name, 270, 25);
+		
+		batch.draw(ammo, 860, 5);
+		font.draw(batch, String.format("%d/OO", Player.instance.currentWeapon.numBullets), 890, 25);
 	}
 
 
@@ -37,6 +41,7 @@ public class InGameUI extends UI{
 		font.dispose();
 		bottonRect.dispose();
 		waveRect.dispose();
+		ammo.dispose();
 	}
 
 

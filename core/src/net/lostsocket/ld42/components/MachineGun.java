@@ -9,6 +9,8 @@ public class MachineGun extends Weapon{
 		shootRate = 0.05f;
 		damage = 20;
 		name = "Machine Gun";
+		magSize = 30;
+		numBullets = magSize;
 	}
 	
 	public void shoot() {
@@ -22,19 +24,24 @@ public class MachineGun extends Weapon{
 		case 2:
 			damage += 5;
 			shootRate -= 0.005f;
+			magSize += 10;
 			break; 
 		case 3:
 			damage += 5;
 			shootRate -= 0.005f;
+			magSize += 10;
 			break;
 		case 4:
 			damage += 5;
 			shootRate -= 0.005f;
+			magSize += 10;
 			break; 
 		case 5:
 			damage += 5;
 			shootRate -= 0.005f;
+			magSize += 10;
 			break;
 		}
+
 	}
 }
