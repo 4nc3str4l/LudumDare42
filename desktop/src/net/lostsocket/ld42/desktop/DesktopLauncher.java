@@ -9,6 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 960;
 		config.height = 640;
+		config.title = "Field of Bodies (LD 42, By C.M)";
+		config.resizable = false;
 		new LwjglApplication(new RunningOutOfSpace(), config);
 	}
 }

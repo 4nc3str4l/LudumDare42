@@ -18,7 +18,6 @@ public class GameScene extends AbstractScene{
 	
 	@Override
 	public void load() {
-		System.out.println("Game Scene Loaded!");
 		addEntity(new GameManager(), false);
 		addEntity(new MapBackground(bgTexture), false);
 	}
@@ -41,7 +40,6 @@ public class GameScene extends AbstractScene{
 	
 	@Override
 	public void customDispose() {
-		System.out.println("Game Scene Disposed!");
 		bgTexture.dispose();
 		bgForest.dispose();
 		lightMask.getTexture().dispose();

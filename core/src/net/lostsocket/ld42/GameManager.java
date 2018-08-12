@@ -141,6 +141,7 @@ public class GameManager extends Entity {
 			if(wave > 5) {
 				z.maxHealth += wave * 10;
 				z.health += wave * 10;
+				z.speed += Maths.getRandomBetween(0, 40);
 			}
 			spawnedZombies.add(z);
 			aliveZombies.add(z);

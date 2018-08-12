@@ -38,6 +38,7 @@ public abstract class AbstractScene {
 			entities.add(2, toAdd);
 		}
 		
+		entitiesToPrepent.clear();
 		entitiesToAdd.clear();
 
 	}

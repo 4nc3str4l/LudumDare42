@@ -52,7 +52,6 @@ public class UIButton extends UI{
 	}
 	
 	private void onButtonClick() {
-		System.out.println("Button Clicked!");
 		callBack.onButtonClick();
 	}
 	

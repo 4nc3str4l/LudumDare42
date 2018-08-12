@@ -1,5 +1,8 @@
 package net.lostsocket.ld42.components;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+
 import net.lostsocket.ld42.entities.Bullet;
 
 public class Handgun extends Weapon{
@@ -40,14 +43,12 @@ public class Handgun extends Weapon{
 			pushBack += 1;
 			break; 
 		case 5:
-			damage += 20;
+			damage += 50;
 			shootRate -= 0.05f;
 			magSize += 4;
-			pushBack += 1;
+			pushBack += 20;
 			break;
 		}
-		
-		System.out.println("New Level " + newLevel);
 	}
 
 }

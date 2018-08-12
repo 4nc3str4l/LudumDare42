@@ -20,7 +20,8 @@ public class BloodStain extends Entity {
 	
 	public BloodStain(Bullet bullet) {
 		super(0);
-		addComponent(new TimedDestroyComponent(Maths.getRandomFloat(10, 25)));
+		
+		addComponent(new TimedDestroyComponent(Maths.getRandomFloat(0, 40)));
 		addComponent(new SpriteComponent(RunningOutOfSpace.img, 0, 5));
 		
 		transform.setRotation(Maths.getRandomFloat(0, 360));
@@ -48,6 +49,9 @@ public class BloodStain extends Entity {
 		transform.moveForward(moveSpeed * delta);
 		transform.scale.x = targetScaleX * t;
 		transform.scale.y = targetScaleY * t;
+		
+		transform.scale.x = Math.min(transform.scale.x, 1.0f);
+		transform.scale.y = Math.min(transform.scale.y, 1.0f);
 	}
 
 	@Override

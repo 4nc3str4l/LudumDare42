@@ -14,6 +14,7 @@ public class WaveCompletedUI extends UI {
 
 	private Texture waveScreen = new Texture("res/WaveSurvived.png");
 	private Texture spaceToContinue = new Texture("res/space_to_continue.png");
+	private Texture explanation = new Texture("res/ExplanationLayer.png");
 	
 	private BitmapFont font = new BitmapFont();
 	
@@ -157,6 +158,7 @@ public class WaveCompletedUI extends UI {
 	public void render(SpriteBatch batch) {
 		batch.draw(waveScreen, 0, 0);
 		if(currentScreenStatus == ScreenStatus.CHOOSING_ACTION) {
+			batch.draw(explanation, 0, 0);
 			btnBodies.render(batch);
 			btnFindWeapon.render(batch);
 			btnBtnHeal.render(batch);
@@ -182,6 +184,7 @@ public class WaveCompletedUI extends UI {
 		btnConfirm.dispose();
 		font.dispose();
 		spaceToContinue.dispose();
+		explanation.dispose();
 	}
 
 
