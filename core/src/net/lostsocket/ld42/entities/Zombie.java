@@ -70,6 +70,7 @@ public class Zombie extends Mortal{
 
 	@Override
 	public void onCollision(Entity other) {
+		Vector2 pushDirection;
 		if(isAlive && other instanceof Bullet) {
 			
 			Bullet b = (Bullet) other;
@@ -79,12 +80,17 @@ public class Zombie extends Mortal{
 					Maths.getRandomFloat(0.95f, 1.05f),
 					0);
 			
+			pushDirection = new Vector2(b.owner.transform.position);
+			pushDirection.sub(transform.position);
+			pushDirection.nor();
+			transform.position.add(pushDirection.scl(-b.pushBack));
+			
 		}
 		
 		if(other instanceof Zombie) {
 			Zombie z = (Zombie)other;
 			if(z.isAlive && isAlive) {
-				Vector2 pushDirection = new Vector2(other.transform.position);
+				pushDirection = new Vector2(other.transform.position);
 				pushDirection.sub(transform.position);
 				pushDirection.nor();
 				transform.position.add(pushDirection.scl(-1));

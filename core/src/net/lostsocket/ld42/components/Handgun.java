@@ -11,10 +11,11 @@ public class Handgun extends Weapon{
 		name = "Handgun";
 		magSize = 16;
 		numBullets = magSize;
+		pushBack = 0;
 	}
 
 	public void shoot(){
-		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage));
+		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage, pushBack));
 	}
 
 	@Override
@@ -24,21 +25,25 @@ public class Handgun extends Weapon{
 			damage += 20;
 			shootRate -= 0.1f;
 			magSize += 4;
+			pushBack += 1;
 			break; 
 		case 3:
 			damage += 10;
 			shootRate -= 0.05f;
 			magSize += 4;
+			pushBack += 1;
 			break;
 		case 4:
 			damage += 10;
 			shootRate -= 0.05f;
 			magSize += 4;
+			pushBack += 1;
 			break; 
 		case 5:
 			damage += 20;
 			shootRate -= 0.05f;
 			magSize += 4;
+			pushBack += 1;
 			break;
 		}
 		

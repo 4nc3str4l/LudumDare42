@@ -11,10 +11,11 @@ public class MachineGun extends Weapon{
 		name = "Machine Gun";
 		magSize = 30;
 		numBullets = magSize;
+		pushBack = 0;
 	}
 	
 	public void shoot() {
-		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage));
+		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage, pushBack));
 		isMouseDown = false;
 	}
 
@@ -40,6 +41,7 @@ public class MachineGun extends Weapon{
 			damage += 5;
 			shootRate -= 0.005f;
 			magSize += 10;
+			pushBack = 2;
 			break;
 		}
 

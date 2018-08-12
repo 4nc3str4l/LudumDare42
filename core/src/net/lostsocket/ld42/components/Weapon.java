@@ -25,6 +25,8 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	public float reloadSpeed = 1f;
 	
 	private float timeUntilNextShoot = 0;
+	
+	public float pushBack = 0;
 
 	public String name;
 	

@@ -12,11 +12,12 @@ public class Shotgun extends Weapon{
 		name = "Shotgun";
 		magSize = 8;
 		numBullets = magSize;
+		pushBack = 5f;
 	}
 	
 	public void shoot(){
 		for(int i = 0; i < 5; i++)
-			owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x + Maths.getRandomFloat(-0.1f, 0.1f), owner.transform.forward.y + Maths.getRandomFloat(-0.1f, 0.1f), damage));
+			owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x + Maths.getRandomFloat(-0.1f, 0.1f), owner.transform.forward.y + Maths.getRandomFloat(-0.1f, 0.1f), damage, pushBack));
 	}
 
 	@Override
@@ -26,21 +27,25 @@ public class Shotgun extends Weapon{
 			damage += 5;
 			shootRate -= 0.1f;
 			magSize += 1;
+			pushBack += 5;
 			break; 
 		case 3:
 			damage += 5;
 			shootRate -= 0.05f;
 			magSize += 1;
+			pushBack += 5;
 			break;
 		case 4:
 			damage += 5;
 			shootRate -= 0.05f;
 			magSize += 1;
+			pushBack += 5;
 			break; 
 		case 5:
 			damage += 5;
 			shootRate -= 0.05f;
 			magSize += 1;
+			pushBack += 5;
 			break;
 		}
 		
