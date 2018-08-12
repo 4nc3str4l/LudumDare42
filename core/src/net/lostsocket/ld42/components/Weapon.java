@@ -15,7 +15,7 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	
 	private Sound sound;
 	protected float damage = 20;
-	protected float shootRate = 1f;
+	public float shootRate = 1f;
 	private float timeUntilNextShoot = 0;
 
 	public String name;

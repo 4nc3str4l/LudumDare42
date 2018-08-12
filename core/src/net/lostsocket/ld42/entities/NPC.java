@@ -54,6 +54,8 @@ public class NPC extends Mortal {
 		addComponent(aliveSprite);
 
 		deadSprite = new SpriteComponent(RunningOutOfSpace.img, choosenBehaviour * 2 + 3, 1);
+	
+		currentWeapon.shootRate *= 2;
 	}
 	
 	private void chooseRandomBehaviour() {
