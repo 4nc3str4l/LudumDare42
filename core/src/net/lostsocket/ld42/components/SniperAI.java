@@ -31,7 +31,7 @@ public class SniperAI extends NPCAI{
 	private void protectingPlayer() {
 		
 		float distanceToPlayer = distanceToTarget(Player.instance.transform);
-		if(distanceToPlayer > 200) {
+		if(distanceToPlayer > 400) {
 			currentState = State.FINDING_PLAYER;
 		}else {
 			if(target == null || !target.isAlive) {

@@ -139,9 +139,9 @@ public class GameManager extends Entity {
 		for(int i = 0; i < amount; ++i) {
 			Zombie z = new Zombie();
 			if(wave > 5) {
-				z.maxHealth += wave * 10;
-				z.health += wave * 10;
-				z.speed += Maths.getRandomBetween(0, 40);
+				z.health += wave * Maths.getRandomBetween(0, 10);
+				z.maxHealth = z.health;
+				z.speed += Maths.getRandomBetween(-20, 30);
 			}
 			spawnedZombies.add(z);
 			aliveZombies.add(z);
