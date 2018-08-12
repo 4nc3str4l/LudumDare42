@@ -40,8 +40,8 @@ public class NPC extends Mortal {
 
 		super(100, 7);
 
-		health = 100;
-		maxHealth = 100;
+		health = 50;
+		maxHealth = 50;
 		weapons = new Weapon[] { new Handgun(), new Shotgun(), new MachineGun() };
 
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
@@ -117,7 +117,7 @@ public class NPC extends Mortal {
 				float ammount = -5;
 				transform.position.add(pushDirection.scl(ammount));
 				if (z.isAlive) {
-					health -= 5;
+					health -= 10;
 				}	
 			}
 		}else if(other instanceof NPC) {

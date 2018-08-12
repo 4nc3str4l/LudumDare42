@@ -87,7 +87,7 @@ public class GameManager extends Entity {
 	
 	public String tryFindNPC() {
 		
-		if(Maths.getRandomFloat(0, 1) < 0.7){
+		if(Maths.getRandomFloat(0, 1) < 0.5){
 			return "No one found, alive... maybe tomorrow...";
 		}
 		
