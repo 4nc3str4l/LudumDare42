@@ -76,7 +76,7 @@ public class GameManager extends Entity {
 		wave = 0;
 		nZombiesAlive = 0;
 		totalNumKills = 0;
-		currentScene.addEntity(new Player());
+		currentScene.addEntity(new Player(), false);
 		currentState = GameState.PLAYING;
 		changeUI(new InGameUI());
 		remainingTimeWarmingUp = WARMUP_TIME;
@@ -92,7 +92,7 @@ public class GameManager extends Entity {
 		}
 		
 		NPC npc = new NPC();
-		currentScene.addEntity(npc);
+		currentScene.addEntity(npc, false);
 		switch (npc.choosenBehaviour) {
 		case NPC.PROTECTIVE:
 			return "You found a Survivor, it looks like a very protective person";
@@ -138,9 +138,13 @@ public class GameManager extends Entity {
 	private void spawnZombies(int amount) {
 		for(int i = 0; i < amount; ++i) {
 			Zombie z = new Zombie();
+			if(wave > 5) {
+				z.maxHealth += wave * 10;
+				z.health += wave * 10;
+			}
 			spawnedZombies.add(z);
 			aliveZombies.add(z);
-			currentScene.addEntity(z);
+			currentScene.addEntity(z, false);
 		}
 	}
 	

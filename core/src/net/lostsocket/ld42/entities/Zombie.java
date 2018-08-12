@@ -32,13 +32,16 @@ public class Zombie extends Mortal{
 		transform.position.x = Player.instance.transform.position.x + (Maths.getRandomFloat(0, 1) > 0.5 ?  Maths.getRandomFloat(-700, -400) : Maths.getRandomFloat(400, 700));
 		transform.position.y = Player.instance.transform.position.y + (Maths.getRandomFloat(0, 1) > 0.5 ?  Maths.getRandomFloat(-700, -400) : Maths.getRandomFloat(400, 700));
 		
-		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 0);
+		int randomArt = Maths.getRandomBetween(0, 5);
+		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, randomArt * 2, 0);
+		deadSprite = new SpriteComponent(RunningOutOfSpace.img, randomArt * 2 + 1, 0);
+		
 		addComponent(aliveSprite);
+		
 		
 		growlSoundManager = new RandomSound(growl, 5, 20, false);
 		addComponent(growlSoundManager);
 		
-		deadSprite = new SpriteComponent(RunningOutOfSpace.img, 1, 0);
 	}
 	
 	private void loadSounds() {

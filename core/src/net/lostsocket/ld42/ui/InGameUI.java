@@ -62,9 +62,9 @@ public class InGameUI extends UI{
 	}
 	
 	private void drawHealthBar(SpriteBatch batch) {
-		batch.draw(healthBarBackgroud, 75, 12);
+		batch.draw(healthBarBackgroud, 85, 12);
 		float percentage = Player.instance.health / Player.instance.maxHealth;
-		batch.draw(healthBarForeground, 76, 13, percentage * 200, 13);
+		batch.draw(healthBarForeground, 86, 13, percentage * 200, 13);
 	}
 
 	@Override

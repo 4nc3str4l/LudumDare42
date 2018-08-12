@@ -19,8 +19,8 @@ public class GameScene extends AbstractScene{
 	@Override
 	public void load() {
 		System.out.println("Game Scene Loaded!");
-		addEntity(new GameManager());
-		addEntity(new MapBackground(bgTexture));
+		addEntity(new GameManager(), false);
+		addEntity(new MapBackground(bgTexture), false);
 	}
 
 	@Override

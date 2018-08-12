@@ -8,7 +8,7 @@ import net.lostsocket.ld42.components.TimedDestroyComponent;
 
 public class Bullet extends Entity {
 	
-	private final float SPEED = 1000f;
+	public final float SPEED = 1000f;
 	public Entity owner;
 	public float damage;
 	public float pushBack;
@@ -31,10 +31,14 @@ public class Bullet extends Entity {
 
 	@Override
 	public void onCollision(Entity other) {
+		if(isDestroyed)
+			return; 
+		
 		if(other instanceof Zombie) {
 			Zombie z = (Zombie)other;
 			if(z.isAlive) {
 				isDestroyed = true;
+				currentScene.addEntity(new BloodStain(this), true);
 			}
 		}
 	}

@@ -15,7 +15,7 @@ public class Handgun extends Weapon{
 	}
 
 	public void shoot(){
-		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage, pushBack));
+		owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x, owner.transform.forward.y, damage, pushBack), false);
 	}
 
 	@Override

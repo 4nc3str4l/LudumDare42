@@ -34,8 +34,8 @@ public class Player extends Mortal{
 		super(100, 7);
 		instance = this;
 		
-		health = 100000;
-		maxHealth = 100000;
+		health = 100;
+		maxHealth = 100;
 		
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, 0, 1);
 		addComponent(aliveSprite);

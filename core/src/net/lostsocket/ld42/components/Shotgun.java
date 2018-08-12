@@ -17,7 +17,7 @@ public class Shotgun extends Weapon{
 	
 	public void shoot(){
 		for(int i = 0; i < 5; i++)
-			owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x + Maths.getRandomFloat(-0.1f, 0.1f), owner.transform.forward.y + Maths.getRandomFloat(-0.1f, 0.1f), damage, pushBack));
+			owner.currentScene.addEntity(new Bullet(owner, owner.transform.forward.x + Maths.getRandomFloat(-0.1f, 0.1f), owner.transform.forward.y + Maths.getRandomFloat(-0.1f, 0.1f), damage, pushBack), false);
 	}
 
 	@Override

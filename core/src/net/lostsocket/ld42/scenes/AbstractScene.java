@@ -10,6 +10,7 @@ public abstract class AbstractScene {
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Entity> entitiesToAdd = new ArrayList<Entity>();
+	public ArrayList<Entity> entitiesToPrepent = new ArrayList<Entity>();
 	
 	public abstract void load();
 	protected abstract void customDispose();
@@ -31,6 +32,10 @@ public abstract class AbstractScene {
 		
 		for(Entity toAdd : entitiesToAdd) {
 			entities.add(toAdd);
+		}
+		
+		for(Entity toAdd : entitiesToPrepent) {
+			entities.add(2, toAdd);
 		}
 		
 		entitiesToAdd.clear();
@@ -62,9 +67,13 @@ public abstract class AbstractScene {
 		customRender(batch);
 	}
 	
-	public void addEntity(Entity newEntity) {
+	public void addEntity(Entity newEntity, boolean atBeginning) {
 		newEntity.currentScene = this;
-		entitiesToAdd.add(newEntity);
+		if(atBeginning) {
+			entitiesToPrepent.add(newEntity);
+		}else {
+			entitiesToAdd.add(newEntity);
+		}
 	}
 	
 	public void dispose() {
