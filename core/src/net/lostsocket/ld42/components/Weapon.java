@@ -115,4 +115,8 @@ public abstract class Weapon extends AbstractComponent implements IUpdatable{
 	public boolean isShootingAvaliable() {
 		return timeUntilNextShoot <= 0;
 	}
+	
+	public boolean needsToReload() {
+		return numBullets <= 0;
+	}
 }

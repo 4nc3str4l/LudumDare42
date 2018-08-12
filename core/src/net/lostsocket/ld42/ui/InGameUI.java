@@ -31,6 +31,12 @@ public class InGameUI extends UI{
 		font.setColor(Color.WHITE);
 		font.draw(batch, "Current Weapon: " + Player.instance.currentWeapon.name, 270, 25);
 		
+		if(Player.instance.currentWeapon.needsToReload()) {
+			font.setColor(Color.RED);
+			font.draw(batch, String.format("R to reload!"), 780, 25);
+			font.setColor(Color.WHITE);
+		}
+
 		batch.draw(ammo, 860, 5);
 		font.draw(batch, String.format("%d/OO", Player.instance.currentWeapon.numBullets), 890, 25);
 	}
