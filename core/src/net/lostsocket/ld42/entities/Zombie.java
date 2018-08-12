@@ -42,9 +42,9 @@ public class Zombie extends Mortal{
 	}
 	
 	private void loadSounds() {
-		growl = Gdx.audio.newSound(Gdx.files.internal("sounds/zombie.wav"));
-		squish = Gdx.audio.newSound(Gdx.files.internal("sounds/squish.wav"));
-		hit = Gdx.audio.newSound(Gdx.files.internal("sounds/zombie_hit.wav"));
+		growl = Gdx.audio.newSound(Gdx.files.internal("res/sounds/zombie.wav"));
+		squish = Gdx.audio.newSound(Gdx.files.internal("res/sounds/squish.wav"));
+		hit = Gdx.audio.newSound(Gdx.files.internal("res/sounds/zombie_hit.wav"));
 	}
 	
 	@Override

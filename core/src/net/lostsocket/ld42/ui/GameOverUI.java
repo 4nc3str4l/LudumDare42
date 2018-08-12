@@ -10,7 +10,7 @@ import net.lostsocket.ld42.GameManager;
 
 public class GameOverUI extends UI {
 
-	private Texture gameOver = new Texture("GameOver.png");
+	private Texture gameOver = new Texture("res/GameOver.png");
 	private BitmapFont font = new BitmapFont();
 	
 	@Override

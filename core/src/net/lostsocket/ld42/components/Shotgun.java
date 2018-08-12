@@ -6,7 +6,7 @@ import net.lostsocket.ld42.maths.Maths;
 public class Shotgun extends Weapon{
 	
 	public Shotgun() {
-		super("sounds/shotgun.wav");
+		super("res/sounds/shotgun.wav");
 		damage = 20;
 		shootRate = 1.0f;
 		name = "Shotgun";

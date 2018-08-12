@@ -12,8 +12,8 @@ import net.lostsocket.ld42.entities.Player;
 public class InGameUI extends UI{
 	
 	private BitmapFont font = new BitmapFont();
-	private Texture bottonRect = new Texture("BottomUIPannel.png");
-	private Texture waveRect = new Texture("WaveBG.png");
+	private Texture bottonRect = new Texture("res/BottomUIPannel.png");
+	private Texture waveRect = new Texture("res/WaveBG.png");
 	
 	@Override
 	public void render(SpriteBatch batch) {

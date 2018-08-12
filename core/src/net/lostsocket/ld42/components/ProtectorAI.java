@@ -1,11 +1,7 @@
 package net.lostsocket.ld42.components;
 
-import com.badlogic.gdx.math.Vector2;
-
-import net.lostsocket.ld42.GameManager;
 import net.lostsocket.ld42.entities.NPC;
 import net.lostsocket.ld42.entities.Player;
-import net.lostsocket.ld42.entities.Zombie;
 
 public class ProtectorAI extends NPCAI{
 

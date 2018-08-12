@@ -12,9 +12,9 @@ import net.lostsocket.ld42.entities.Zombie;
 
 public class GameScene extends AbstractScene{
 
-	private Texture bgTexture = new Texture("MapBg.png");
-	private Texture bgForest = new Texture("Forest.png");
-	private Sprite lightMask = new Sprite(new Texture("lightMask.png"));
+	private Texture bgTexture = new Texture("res/MapBg.png");
+	private Texture bgForest = new Texture("res/Forest.png");
+	private Sprite lightMask = new Sprite(new Texture("res/lightMask.png"));
 	
 	@Override
 	public void load() {

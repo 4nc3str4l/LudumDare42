@@ -12,8 +12,8 @@ import net.lostsocket.ld42.entities.Player;
 
 public class WaveCompletedUI extends UI {
 
-	private Texture waveScreen = new Texture("WaveSurvived.png");
-	private Texture spaceToContinue = new Texture("space_to_continue.png");
+	private Texture waveScreen = new Texture("res/WaveSurvived.png");
+	private Texture spaceToContinue = new Texture("res/space_to_continue.png");
 	
 	private BitmapFont font = new BitmapFont();
 	

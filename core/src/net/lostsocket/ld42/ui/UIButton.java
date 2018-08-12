@@ -21,9 +21,9 @@ public class UIButton extends UI{
 	private UIButtonClick callBack;
 	
 	public UIButton(String name, int posX, int posY) {
-		normal = new Texture(name + "/btn.png");
-		selected = new Texture(name + "/selected.png");
-		disabled = new Texture(name + "/disabled.png");
+		normal = new Texture("res/"+ name + "/btn.png");
+		selected = new Texture("res/"+ name + "/selected.png");
+		disabled = new Texture("res/"+ name + "/disabled.png");
 		rect = new Rectangle(posX, posY, normal.getWidth(), normal.getHeight());
 		currentTexture = normal;
 	}

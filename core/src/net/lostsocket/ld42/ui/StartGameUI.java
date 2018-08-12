@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StartGameUI extends UI {
 
-	private Texture startScreen = new Texture("StartScreen.png");
+	private Texture startScreen = new Texture("res/StartScreen.png");
 	
 	@Override
 	public void render(SpriteBatch batch) {

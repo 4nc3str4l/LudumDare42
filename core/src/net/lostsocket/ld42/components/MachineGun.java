@@ -5,7 +5,7 @@ import net.lostsocket.ld42.entities.Bullet;
 public class MachineGun extends Weapon{
 
 	public MachineGun() {
-		super("sounds/handgun_shot.wav");
+		super("res/sounds/handgun_shot.wav");
 		shootRate = 0.05f;
 		damage = 20;
 		name = "Machine Gun";

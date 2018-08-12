@@ -12,7 +12,7 @@ public class LandingScene extends AbstractScene{
 	@Override
 	public void load() {
 		System.out.println("Landing Scene Loaded!");
-		background = new Texture("TitleScreen.png");
+		background = new Texture("res/TitleScreen.png");
 	}
 
 	@Override
