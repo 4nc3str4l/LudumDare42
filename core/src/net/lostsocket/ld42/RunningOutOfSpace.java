@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import net.lostsocket.ld42.scenes.GameScene;
+import net.lostsocket.ld42.scenes.LandingScene;
 import net.lostsocket.ld42.scenes.SceneManager;
 
 public class RunningOutOfSpace extends ApplicationAdapter {
@@ -18,7 +19,7 @@ public class RunningOutOfSpace extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("OutOfSpace.png");
-		SceneManager.loadScene(new GameScene());
+		SceneManager.loadScene(new LandingScene());
 	}
 
 	@Override
