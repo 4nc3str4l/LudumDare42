@@ -40,22 +40,29 @@ public class NPC extends Mortal {
 
 		super(100, 7);
 
-		health = 10000;
-		maxHealth = 10000;
+		health = 1000;
+		maxHealth = 1000;
 		weapons = new Weapon[] { new Handgun(), new Shotgun(), new MachineGun() };
 
 		transform.position.x = Gdx.graphics.getWidth() / 2 - 16;
 		transform.position.y = Gdx.graphics.getHeight() / 2 - 16;
 
 		chooseRandomBehaviour();
-		equipWeapon(Maths.getRandomBetween(0, 3));
+		
+		if(choosenBehaviour != 3) {
+			equipWeapon(Maths.getRandomBetween(0, 3));
+		}else { // Sniper always have good weapons
+			equipWeapon(Maths.getRandomBetween(1, 3));
+		}
+		
+		speed += 10 * Maths.getRandomBetween(0, 4);
 		
 		aliveSprite = new SpriteComponent(RunningOutOfSpace.img, choosenBehaviour * 2, 1);
 		addComponent(aliveSprite);
 
 		deadSprite = new SpriteComponent(RunningOutOfSpace.img, choosenBehaviour * 2 + 1, 1);
 	
-		currentWeapon.shootRate *= 2;
+		currentWeapon.shootRate = Maths.getRandomFloat(0.3f, 1f);
 	}
 	
 	private void chooseRandomBehaviour() {

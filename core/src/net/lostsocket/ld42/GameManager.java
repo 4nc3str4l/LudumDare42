@@ -34,7 +34,7 @@ public class GameManager extends Entity {
 	public enum GameState { NOT_STARTED, PLAYING, WAVE_SURVIVED, GAME_OVER }
 	public GameState currentState = GameState.NOT_STARTED;
 	
-	public final float WARMUP_TIME = 1.0f;
+	public final float WARMUP_TIME = 0.1f;
 	private float remainingTimeWarmingUp = 1.0f;
 	
 	public ArrayList<Zombie> spawnedZombies = new ArrayList<Zombie>();

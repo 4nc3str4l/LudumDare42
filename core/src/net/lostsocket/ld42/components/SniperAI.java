@@ -5,6 +5,7 @@ import net.lostsocket.ld42.entities.Player;
 
 public class SniperAI extends NPCAI{
 
+	
 	public SniperAI(NPC npc) {
 		super(npc);
 	}
@@ -30,15 +31,16 @@ public class SniperAI extends NPCAI{
 	
 	private void protectingPlayer() {
 		
+
 		float distanceToPlayer = distanceToTarget(Player.instance.transform);
-		if(distanceToPlayer > 400) {
+		if(distanceToPlayer > 250) {
 			currentState = State.FINDING_PLAYER;
 		}else {
 			if(target == null || !target.isAlive) {
 				target = findClosestZombieToPlayer();
 			}else {
 				npc.transform.lookAt(target.transform.position.x, target.transform.position.y);
-				if(distanceToTarget(target.transform) < 500) {
+				if(distanceToTarget(target.transform) < 450) {
 					npc.currentWeapon.tryShootNPC();
 				}
 			}
